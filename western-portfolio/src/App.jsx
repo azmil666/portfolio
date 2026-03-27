@@ -58,11 +58,31 @@ const CONTENT = {
   projects: {
     title: "Tales & Bounties",
     items: [
-      { name: "MedCore HMS", desc: "Full-stack hospital management system", tech: "Flask · SQLite · JS" },
-      { name: "NextGen Studio", desc: "Multi-page agency site with editorial design", tech: "HTML · CSS · GSAP" },
-      { name: "Luminary SaaS", desc: "Dark mode particle-network landing page", tech: "Vanilla JS · Canvas" },
-      { name: "Western Portfolio", desc: "Cinematic 3D scroll-driven portfolio", tech: "R3F · Three.js · React" },
-    ],
+  {
+    name: "Loomi",
+    desc: "AI-powered productivity & journaling platform with clean UX and smart insights.",
+    tech: "React · Node · AI",
+    link: "https://github.com/azmil666/Loomi"
+  },
+  {
+    name: "CoinStorm",
+    desc: "Crypto tracking and analytics dashboard with real-time market insights.",
+    tech: "JS · API · Charts",
+    link: "https://github.com/azmil666/coinstorm"
+  },
+  {
+    name: "Classroom",
+    desc: "Frontend system for managing classes, students, and learning workflows.",
+    tech: "React · UI",
+    link: "https://github.com/azmil666/classroom-frontend"
+  },
+  {
+    name: "Kaffa",
+    desc: "Coffee-themed modern web experience with aesthetic UI and interactions.",
+    tech: "HTML · CSS · JS",
+    link: "https://github.com/azmil666/kaffa"
+  },
+],
   },
   skills: {
     title: "Tools of the Trade",
@@ -77,10 +97,22 @@ const CONTENT = {
     title: "Send a Telegram",
     lines: ["Riding into a new challenge.", "Drop a line — I'll meet you at sundown."],
     links: [
-      { label: "azmil@email.com", icon: "✉" },
-      { label: "github.com/azmil", icon: "◈" },
-      { label: "linkedin.com/in/azmil", icon: "◉" },
-    ],
+  { 
+    label: "azmilmohammed369@email.com", 
+    icon: "✉",
+    link: "mailto:azmilmohammed369@email.com"
+  },
+  { 
+    label: "github.com/azmil666", 
+    icon: "◈",
+    link: "https://github.com/azmil666"
+  },
+  { 
+    label: "linkedin.com/in/azmil-mohammed", 
+    icon: "◉",
+    link: "https://linkedin.com/in/azmil-mohammed"
+  },
+],
   },
 };
 
@@ -369,13 +401,29 @@ function SectionPanel({ sectionId, visible, onClose }) {
             <div className="panel-divider" />
             <div className="projects-grid">
               {content.items.map((p, i) => (
-                <div key={i} className="project-card">
+                <a 
+                  key={i}
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-card"
+                >
                   <div className="project-num">0{i + 1}</div>
                   <div className="project-name">{p.name}</div>
                   <div className="project-desc">{p.desc}</div>
                   <div className="project-tech">{p.tech}</div>
-                </div>
+                </a>
               ))}
+              <div className="projects-more">
+  <a 
+    href="https://github.com/azmil666"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="more-btn"
+  >
+    View All on GitHub →
+  </a>
+</div>
             </div>
           </>
         )}
@@ -408,8 +456,14 @@ function SectionPanel({ sectionId, visible, onClose }) {
             ))}
             <div className="contact-links">
               {content.links.map((link) => (
-                <a key={link.label} href="#" className="contact-link">
-                  <span className="contact-icon">{link.icon}</span>
+                  <a 
+                    key={link.label} 
+                    href={link.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-link"
+                  >
+                    <span className="contact-icon">{link.icon}</span>
                   <span>{link.label}</span>
                 </a>
               ))}
@@ -1008,20 +1062,24 @@ const CSS = `
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin-top: 4px;
-  }
 
-  .project-card {
-    border: 1px solid rgba(212,160,48,0.2);
-    padding: 18px 16px;
-    background: rgba(255,255,255,0.02);
-    transition: all 0.3s;
-    cursor: default;
   }
+  .project-card {
+  cursor: pointer;
+  text-decoration: none;  
+  color: inherit;         
+}  
 
   .project-card:hover {
-    background: rgba(212,160,48,0.07);
-    border-color: rgba(212,160,48,0.45);
-  }
+  background: rgba(212,160,48,0.12);
+  border-color: rgba(212,160,48,0.7);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4),
+              0 0 12px rgba(212,160,48,0.25);
+}
+ .project-card:active {
+  transform: scale(0.98);
+}             
 
   .project-num {
     font-family: 'Cinzel', serif;
@@ -1134,6 +1192,25 @@ const CSS = `
     z-index: 5;
   }
 
+  .more-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4a030 !important;
+  border: 1px solid rgba(212,160,48,0.4);
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.more-btn:hover {
+  background: rgba(212,160,48,0.15);
+  color: #f0d080 !important;
+  border-color: rgba(212,160,48,0.8);
+  box-shadow: 0 0 12px rgba(212,160,48,0.4);
+}
   /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
     .hud { padding: 16px 20px; }
@@ -1146,4 +1223,5 @@ const CSS = `
     .panel-card { padding: 40px 24px 32px; }
     .panel-title { font-size: 26px; }
   }
+    
 `;
