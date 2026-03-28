@@ -7,6 +7,7 @@ import './App.css'
 import LoadingScreen from "./components/LoadingScreen";
 import MobileNav from "./components/MobileNav";
 import MobileMenu from "./components/MobileMenu";
+import { AnimatedThemeToggler } from "./components/ui/animated-theme-toggler";
 
 const SECTIONS = [
   {
@@ -319,23 +320,46 @@ function Ground() {
 }
 
 // ─── SKY DOME ─────────────────────────────────────────────────────────────────
-function WesternSky() {
+function WesternSky({ isNight }) {
   return (
     <mesh>
       <sphereGeometry args={[200, 32, 16]} />
-      <meshBasicMaterial color="#e8c97a" side={THREE.BackSide} />
+      <meshBasicMaterial 
+        color={isNight ? "#0b0f1a" : "#e8c97a"} 
+        side={THREE.BackSide} 
+      />
     </mesh>
   );
 }
 
 // ─── SCENE ────────────────────────────────────────────────────────────────────
 function Scene({ scrollProgress, onSectionChange }) {
+  const [isNight, setIsNight] = useState(false);
+
+useEffect(() => {
+  const update = () => {
+    setIsNight(document.documentElement.classList.contains("dark"));
+  };
+
+  update();
+
+  const observer = new MutationObserver(update);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  return () => observer.disconnect();
+}, []);
   return (
     <>
-      <WesternSky />
+      <WesternSky isNight={isNight} />
       <Ground />
 
-      <ambientLight intensity={0.6} color="#ffd580" />
+      <ambientLight 
+  intensity={isNight ? 0.2 : 0.6} 
+  color={isNight ? "#8899ff" : "#ffd580"} 
+/>
       <directionalLight
         position={[60, 40, 30]}
         intensity={1.8}
@@ -348,11 +372,29 @@ function Scene({ scrollProgress, onSectionChange }) {
         shadow-camera-top={80}
         shadow-camera-bottom={-80}
       />
-      <directionalLight position={[-30, 20, -20]} intensity={0.4} color="#ff9944" />
-      <hemisphereLight skyColor="#ffa050" groundColor="#c87840" intensity={0.5} />
-
-      <fog attach="fog" args={["#d4964a", 40, 160]} />
-      <Stars radius={180} depth={50} count={1200} factor={2} fade speed={0.3} />
+      <directionalLight
+  position={[60, 40, 30]}
+  intensity={isNight ? 0.6 : 1.8}
+  color={isNight ? "#9bbcff" : "#ffcc66"}
+  castShadow
+/>
+     <hemisphereLight 
+  skyColor={isNight ? "#1a2a4f" : "#ffa050"} 
+  groundColor={isNight ? "#111122" : "#c87840"} 
+  intensity={isNight ? 0.3 : 0.5} 
+/>
+     <fog 
+  attach="fog" 
+  args={[isNight ? "#0a0f1f" : "#d4964a", 40, 160]} 
+/>
+     <Stars 
+  radius={180} 
+  depth={50} 
+  count={isNight ? 2000 : 200} 
+  factor={2} 
+  fade 
+  speed={0.3} 
+/>
 
       <DustParticles />
 
@@ -582,6 +624,7 @@ export default function App() {
   const [showHint, setShowHint] = useState(true);
   const containerRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
+  
 
   useEffect(() => {
     const handleWheel = (e) => {
@@ -734,6 +777,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
       {/* <CameraDebuggerDOM /> */}
 
       <HUD currentSection={currentSection} onNavClick={handleNavClick} />
+      
       <MobileMenu 
   onNavClick={handleNavClick} 
   setMenuOpen={setMenuOpen}
@@ -744,6 +788,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
     currentSection={currentSection}
   />
 )}
+<AnimatedThemeToggler className="theme-toggle" />
       <SectionTitle currentSection={currentSection} />
       <BuildingHint currentSection={currentSection} onOpen={setOpenPanel} />
       <ProgressBar currentSection={currentSection} />
