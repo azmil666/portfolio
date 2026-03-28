@@ -581,6 +581,7 @@ export default function App() {
   const [openPanel, setOpenPanel] = useState(null);
   const [showHint, setShowHint] = useState(true);
   const containerRef = useRef();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleWheel = (e) => {
@@ -733,11 +734,16 @@ target: new THREE.Vector3(${data.look.join(", ")})
       {/* <CameraDebuggerDOM /> */}
 
       <HUD currentSection={currentSection} onNavClick={handleNavClick} />
-      <MobileMenu onNavClick={handleNavClick} />
-      <MobileNav 
-        onNavClick={handleNavClick} 
-        currentSection={currentSection}
-      />
+      <MobileMenu 
+  onNavClick={handleNavClick} 
+  setMenuOpen={setMenuOpen}
+/>
+      {!openPanel && !menuOpen && (
+  <MobileNav 
+    onNavClick={handleNavClick} 
+    currentSection={currentSection}
+  />
+)}
       <SectionTitle currentSection={currentSection} />
       <BuildingHint currentSection={currentSection} onOpen={setOpenPanel} />
       <ProgressBar currentSection={currentSection} />
