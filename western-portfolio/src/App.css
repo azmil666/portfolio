@@ -1,3 +1,10 @@
+ @font-face {
+  font-family: 'Django';
+  src: url('./assets/fonts/The-Django.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+ 
  @import url('https://fonts.googleapis.com/css2?family=Rye&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap');
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,12 +43,15 @@
   }
 
   .hud-name {
-    font-family: 'Rye', serif;
-    font-size: 20px;
-    color: #f0d080;
-    letter-spacing: 4px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-  }
+  font-family: 'Django', serif;
+  font-size: 20px;
+  color: #f0d080;
+  letter-spacing: 4px;
+
+  text-shadow:
+    2px 2px 0 rgba(0,0,0,0.8),
+    0 0 20px rgba(212,160,48,0.4);
+}
 
   .hud-title {
     font-family: 'Cinzel', serif;
@@ -58,7 +68,7 @@
   }
 
   .hud-nav-btn {
-    font-family: 'Cinzel', serif;
+    font-family: 'Django', serif;
     font-size: 11px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
@@ -103,7 +113,7 @@
   }
 
   .section-heading {
-    font-family: 'Rye', serif;
+    font-family: 'Django', serif;
     font-size: clamp(36px, 5vw, 64px);
     color: #f5e0a0;
     line-height: 1;

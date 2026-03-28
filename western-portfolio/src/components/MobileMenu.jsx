@@ -142,7 +142,7 @@ export default function MobileMenu({ onNavClick, setMenuOpen }) {
           .rdr-header {
             position: relative;
             z-index: 2;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Django', serif;
             color: #8c1c13; /* Crimson */
             font-size: 13px;
             letter-spacing: 5px;
@@ -172,7 +172,7 @@ export default function MobileMenu({ onNavClick, setMenuOpen }) {
             background: transparent;
             border: none;
             color: #9c8e79; /* Muted Dusty Gold */
-            font-family: 'Playfair Display', serif;
+            font-family: 'Django', serif;
             font-size: 26px;
             font-weight: 400;
             text-transform: uppercase;
@@ -188,6 +188,20 @@ export default function MobileMenu({ onNavClick, setMenuOpen }) {
             display: flex;
             align-items: center;
           }
+            .rdr-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background: #d4a030;
+            transition: width 0.3s ease;
+            }
+
+            .rdr-btn:hover::after {
+            width: 100%;
+            }
 
           /* Staggering delays */
           .rdr-panel.is-open .rdr-btn:nth-child(1) { transition-delay: 0.15s; }
