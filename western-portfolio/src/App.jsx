@@ -3,6 +3,10 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Environment, Html, Stars } from "@react-three/drei";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
+import './app.css'
+import LoadingScreen from "./components/LoadingScreen";
+import MobileNav from "./components/MobileNav";
+import MobileMenu from "./components/MobileMenu";
 
 const SECTIONS = [
   {
@@ -40,7 +44,7 @@ const SECTIONS = [
     id: "contact",
     label: "Contact",
     subtitle: "THE HOTEL",
-    position: new THREE.Vector3(10.90, 3.0, -14.5),
+    position: new THREE.Vector3(10.90, 3.0, -20),
     target: new THREE.Vector3(17.5, 3.2, -10.2),
     fov: 47,
   },
@@ -264,7 +268,7 @@ function CinematicCamera({ scrollProgress, onSectionChange }) {
   
 
   useFrame((_, delta) => {
-    console.log("CAM POS:", camera.position)
+    // console.log("CAM POS:", camera.position)
     const raw = scrollProgress.current;
     const segCount = SECTIONS.length - 1;
 
@@ -352,7 +356,7 @@ function Scene({ scrollProgress, onSectionChange }) {
 
       <DustParticles />
 
-      <Suspense fallback={<FallbackTown />}>
+      <Suspense fallback={<LoadingScreen /> }>
         <WesternCity />
       </Suspense>
       {/* <CameraTracker /> */}
@@ -489,7 +493,6 @@ function HUD({ currentSection, onNavClick }) {
       <div className="hud-brand">
         <span className="hud-star">★</span>
         <span className="hud-name">AZMIL</span>
-        <span className="hud-title">DEV</span>
       </div>
       <nav className="hud-nav">
         {navItems.map((item) => (
@@ -510,7 +513,16 @@ function HUD({ currentSection, onNavClick }) {
 function ScrollHint({ visible }) {
   return (
     <div className={`scroll-hint ${visible ? "visible" : ""}`}>
-      <div className="scroll-horse">⬇</div>
+      <div className="scroll-horse">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M12 5V19M12 19L6 13M12 19L18 13"
+      stroke="#f0d080"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+</div>
       <span>Ride on down</span>
     </div>
   );
@@ -581,22 +593,30 @@ export default function App() {
     };
 
     const handleTouch = (() => {
-      let lastY = null;
-      return (e) => {
-        if (openPanel) return;
-        const y = e.touches[0].clientY;
-        if (lastY !== null) {
-          const dy = lastY - y;
-          scrollProgress.current = Math.min(
-            1,
-            Math.max(0, scrollProgress.current + dy * 0.002)
-          );
-          setShowHint(false);
-        }
-        lastY = y;
-        if (e.type === "touchend") lastY = null;
-      };
-    })();
+  let lastY = null;
+
+  return (e) => {
+    if (openPanel) return;
+
+    if (!e.touches || e.touches.length === 0) {
+      lastY = null;
+      return;
+    }
+
+    const y = e.touches[0].clientY;
+
+    if (lastY !== null) {
+      const dy = lastY - y;
+      scrollProgress.current = Math.min(
+        1,
+        Math.max(0, scrollProgress.current + dy * 0.0012)
+      );
+      setShowHint(false);
+    }
+
+    lastY = y;
+  };
+})();
 
     const el = containerRef.current;
     el.addEventListener("wheel", handleWheel, { passive: true });
@@ -713,6 +733,11 @@ target: new THREE.Vector3(${data.look.join(", ")})
       {/* <CameraDebuggerDOM /> */}
 
       <HUD currentSection={currentSection} onNavClick={handleNavClick} />
+      <MobileMenu onNavClick={handleNavClick} />
+      <MobileNav 
+        onNavClick={handleNavClick} 
+        currentSection={currentSection}
+      />
       <SectionTitle currentSection={currentSection} />
       <BuildingHint currentSection={currentSection} onOpen={setOpenPanel} />
       <ProgressBar currentSection={currentSection} />
@@ -724,504 +749,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
         onClose={() => setOpenPanel(null)}
       />
 
-      <style>{CSS}</style>
+      
     </div>
   );
 }
-
-// ─── STYLES ───────────────────────────────────────────────────────────────────
-const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Rye&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap');
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  .app-root {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-    background: #2a1a0a;
-    cursor: crosshair;
-  }
-
-  /* ── HUD ── */
-  .hud {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 36px;
-    background: linear-gradient(to bottom, rgba(20,10,2,0.75) 0%, transparent 100%);
-  }
-
-  .hud-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .hud-star {
-    color: #d4a030;
-    font-size: 18px;
-    text-shadow: 0 0 12px rgba(212,160,48,0.6);
-  }
-
-  .hud-name {
-    font-family: 'Rye', serif;
-    font-size: 20px;
-    color: #f0d080;
-    letter-spacing: 4px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-  }
-
-  .hud-title {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    color: #a07840;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  .hud-nav {
-    display: flex;
-    gap: 8px;
-  }
-
-  .hud-nav-btn {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: rgba(220,190,120,0.7);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px 14px;
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s;
-  }
-
-  .hud-nav-btn:hover,
-  .hud-nav-btn.active {
-    color: #f0d080;
-    border-bottom-color: #d4a030;
-    text-shadow: 0 0 12px rgba(212,160,48,0.5);
-  }
-
-  /* ── SECTION TITLE ── */
-  .section-title-wrap {
-    position: fixed;
-    bottom: 120px;
-    left: 48px;
-    z-index: 10;
-    animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .section-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #d4a030;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-  }
-
-  .section-heading {
-    font-family: 'Rye', serif;
-    font-size: clamp(36px, 5vw, 64px);
-    color: #f5e0a0;
-    line-height: 1;
-    text-shadow: 3px 3px 0 rgba(0,0,0,0.5), 0 0 40px rgba(212,160,48,0.3);
-    letter-spacing: 2px;
-  }
-
-  .section-line {
-    width: 80px;
-    height: 2px;
-    background: linear-gradient(to right, #d4a030, transparent);
-    margin-top: 12px;
-  }
-
-  /* ── BUILDING HINT ── */
-  .building-hint {
-    position: fixed;
-    bottom: 60px;
-    left: 48px;
-    z-index: 10;
-    font-family: 'Cinzel', serif;
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: rgba(220,190,100,0.9);
-    background: rgba(10,5,2,0.5);
-    border: 1px solid rgba(212,160,48,0.3);
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    animation: fadeSlideUp 0.5s 0.3s cubic-bezier(0.16,1,0.3,1) both;
-  }
-
-  .building-hint:hover {
-    background: rgba(212,160,48,0.15);
-    border-color: rgba(212,160,48,0.7);
-    color: #f0d080;
-  }
-
-  .hint-bracket {
-    color: #d4a030;
-    margin: 0 6px;
-  }
-
-  /* ── SCROLL HINT ── */
-  .scroll-hint {
-    position: fixed;
-    bottom: 32px;
-    right: 48px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-  }
-
-  .scroll-hint.visible { opacity: 1; }
-
-  .scroll-horse {
-    animation: bounce 1.5s infinite;
-    font-size: 20px;
-    color: rgba(212,160,48,0.7);
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
-  }
-
-  .scroll-hint span {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: rgba(212,160,48,0.6);
-    text-transform: uppercase;
-  }
-
-  /* ── PROGRESS ── */
-  .progress-wrap {
-    position: fixed;
-    right: 32px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .progress-track {
-    display: none;
-  }
-
-  .progress-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(212,160,48,0.25);
-    border: 1px solid rgba(212,160,48,0.3);
-    transition: all 0.4s;
-  }
-
-  .progress-dot.active {
-    background: #d4a030;
-    box-shadow: 0 0 10px rgba(212,160,48,0.6);
-    transform: scale(1.4);
-  }
-
-  /* ── PANEL OVERLAY ── */
-  .panel-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    background: rgba(8,4,1,0.75);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 24px;
-    animation: fadeIn 0.3s ease both;
-    backdrop-filter: blur(4px);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .panel-card {
-    position: relative;
-    width: min(520px, 100%);
-    max-height: 90vh;
-    overflow-y: auto;
-    background: linear-gradient(160deg, #1a0e05 0%, #0d0702 100%);
-    border: 1px solid rgba(212,160,48,0.3);
-    border-left: 3px solid #d4a030;
-    padding: 48px 44px 44px;
-    animation: slideInRight 0.5s cubic-bezier(0.16,1,0.3,1) both;
-  }
-
-  @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .panel-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: 1px solid rgba(212,160,48,0.3);
-    color: rgba(212,160,48,0.7);
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .panel-close:hover {
-    background: rgba(212,160,48,0.15);
-    color: #f0d080;
-  }
-
-  .panel-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #a07830;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .panel-title {
-    font-family: 'Rye', serif;
-    font-size: 32px;
-    color: #f0d080;
-    line-height: 1.1;
-    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
-    margin-bottom: 4px;
-  }
-
-  .panel-divider {
-    width: 60px;
-    height: 1px;
-    background: rgba(212,160,48,0.4);
-    margin: 20px 0;
-  }
-
-  .panel-body {
-    font-family: 'IM Fell English', serif;
-    font-size: 15px;
-    color: rgba(220,195,140,0.85);
-    line-height: 1.8;
-    margin-bottom: 12px;
-  }
-
-  .panel-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .panel-tag {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: #d4a030;
-    border: 1px solid rgba(212,160,48,0.35);
-    padding: 5px 12px;
-    text-transform: uppercase;
-  }
-
-  /* ── PROJECTS ── */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 4px;
-
-  }
-  .project-card {
-  cursor: pointer;
-  text-decoration: none;  
-  color: inherit;         
-}  
-
-  .project-card:hover {
-  background: rgba(212,160,48,0.12);
-  border-color: rgba(212,160,48,0.7);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4),
-              0 0 12px rgba(212,160,48,0.25);
-}
- .project-card:active {
-  transform: scale(0.98);
-}             
-
-  .project-num {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    color: #a07830;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-
-  .project-name {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #f0d080;
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
-  }
-
-  .project-desc {
-    font-family: 'IM Fell English', serif;
-    font-size: 12px;
-    color: rgba(200,170,110,0.7);
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
-
-  .project-tech {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    color: #a07830;
-    text-transform: uppercase;
-  }
-
-  /* ── SKILLS ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .skill-category {
-    border-left: 2px solid rgba(212,160,48,0.3);
-    padding-left: 16px;
-  }
-
-  .skill-cat-name {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: #d4a030;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .skill-item {
-    font-family: 'IM Fell English', serif;
-    font-size: 14px;
-    color: rgba(220,195,140,0.8);
-    padding: 4px 0;
-    border-bottom: 1px solid rgba(212,160,48,0.08);
-  }
-
-  /* ── CONTACT ── */
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 24px;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    color: rgba(220,190,120,0.85);
-    text-decoration: none;
-    border: 1px solid rgba(212,160,48,0.2);
-    padding: 12px 18px;
-    transition: all 0.25s;
-  }
-
-  .contact-link:hover {
-    background: rgba(212,160,48,0.1);
-    border-color: rgba(212,160,48,0.5);
-    color: #f0d080;
-  }
-
-  .contact-icon {
-    color: #d4a030;
-    font-size: 16px;
-    width: 20px;
-    text-align: center;
-  }
-
-  /* ── SCROLLBAR ── */
-  .panel-card::-webkit-scrollbar { width: 4px; }
-  .panel-card::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
-  .panel-card::-webkit-scrollbar-thumb { background: rgba(212,160,48,0.3); border-radius: 2px; }
-
-  /* ── VIGNETTE ── */
-  .app-root::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 55%, rgba(10,5,0,0.65) 100%);
-    z-index: 5;
-  }
-
-  .more-btn {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #d4a030 !important;
-  border: 1px solid rgba(212,160,48,0.4);
-  padding: 10px 18px;
-  text-decoration: none;
-  transition: all 0.3s;
-  display: inline-block;
-}
-
-.more-btn:hover {
-  background: rgba(212,160,48,0.15);
-  color: #f0d080 !important;
-  border-color: rgba(212,160,48,0.8);
-  box-shadow: 0 0 12px rgba(212,160,48,0.4);
-}
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .hud { padding: 16px 20px; }
-    .hud-name { font-size: 16px; letter-spacing: 2px; }
-    .hud-nav-btn { font-size: 9px; padding: 5px 8px; }
-    .section-title-wrap { left: 20px; bottom: 140px; }
-    .building-hint { left: 20px; bottom: 80px; font-size: 10px; padding: 8px 14px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .panel-card { padding: 40px 24px 32px; }
-    .panel-title { font-size: 26px; }
-  }
-    
-`;
