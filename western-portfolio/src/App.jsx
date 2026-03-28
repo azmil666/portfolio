@@ -140,6 +140,41 @@ function WesternCity() {
 
   useEffect(() => {
     scene.traverse((child) => {
+      let woodTexture = null;
+
+scene.traverse((child) => {
+  if (child.isMesh && child.material?.map && !woodTexture) {
+    woodTexture = child.material.map;
+    woodTexture.wrapS = woodTexture.wrapT = THREE.RepeatWrapping;
+woodTexture.repeat.set(2, 2);
+    console.log("WOOD TEXT FOUND", child.name);
+  }
+});
+scene.traverse((child) => {
+  if (child.isMesh) {
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+    const applyMat = (mat) => {
+      if (!mat) return;
+
+      
+      if (woodTexture) {
+        mat.map = woodTexture;
+        mat.needsUpdate = true;
+      }
+
+      mat.roughness = 0.75;
+      mat.metalness = 0.05;
+    };
+
+    if (Array.isArray(child.material)) {
+      child.material.forEach(applyMat);
+    } else {
+      applyMat(child.material);
+    }
+  }
+});
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
@@ -386,15 +421,15 @@ useEffect(() => {
   castShadow
 />
 <pointLight
-  position={[18, 3, -12]}  // near hotel
+  position={[18, 3, -12]} 
   intensity={isNight ? 1.5 : 0}
   color="#ffb347"
   distance={30}
   decay={2}
 />
 <spotLight
-  position={[10, 8, -18]}   // above hotel
-  target-position={[17, 5, -10]} // aim at sign
+  position={[10, 8, -18]}   
+  target-position={[17, 5, -10]} 
   intensity={2}
   angle={0.4}
   penumbra={0.5}
@@ -402,7 +437,7 @@ useEffect(() => {
   castShadow
 />
 <directionalLight
-  position={[ -20, 10, -10 ]}  // from opposite side
+  position={[ -20, 10, -10 ]} 
   intensity={isNight ? 0.8 : 0}
   color="#6fa8ff"
 />
