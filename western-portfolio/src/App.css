@@ -39,12 +39,24 @@
   gap: 8px;
 }
 
-  .hud-star {
-    color: #d4a030;
-    font-size: 18px;
-    text-shadow: 0 0 12px rgba(212,160,48,0.6);
-  }
+ .hud-star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 22px;
+  height: 22px;
+
+  color: #b68d4c; 
+}
+
+.hud-star img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 6px rgba(212,160,48,0.6));
+}
   .hud-name {
   font-family: 'Django', serif;
 
@@ -627,4 +639,26 @@
     width: 40px;
     height: 40px;
   }
+}
+
+.cowboy-icon {
+  width: 22px;
+  height: 22px;
+
+  background-color: #b68d4c; 
+
+  -webkit-mask: url('/cowboy.svg') no-repeat center;
+  -webkit-mask-size: contain;
+
+  mask: url('/cowboy.svg') no-repeat center;
+  mask-size: contain;
+
+  filter: drop-shadow(0 0 6px rgba(182,141,76,0.6));
+}
+.dark .cowboy-icon {
+  background-color: #d4a030;
+
+  filter: 
+    drop-shadow(0 0 8px rgba(212,160,48,0.9))
+    drop-shadow(0 0 16px rgba(212,160,48,0.5));
 }

@@ -596,7 +596,9 @@ function HUD({ currentSection, onNavClick }) {
   return (
     <div className="hud">
       <div className="hud-brand">
-        <span className="hud-star">★</span>
+        <span className="hud-star">
+  <span className="hud-star cowboy-icon"></span>
+</span>
         <span className="hud-name">AZMIL</span>
       </div>
       <nav className="hud-nav">
