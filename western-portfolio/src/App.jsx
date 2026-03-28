@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Environment, Html, Stars } from "@react-three/drei";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
-import './app.css'
+import './App.css'
 import LoadingScreen from "./components/LoadingScreen";
 import MobileNav from "./components/MobileNav";
 import MobileMenu from "./components/MobileMenu";
