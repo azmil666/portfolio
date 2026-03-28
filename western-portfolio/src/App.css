@@ -15,7 +15,7 @@
     overflow: hidden;
     position: relative;
     background: #2a1a0a;
-    cursor: crosshair;
+    
   }
 
   /* ── HUD ── */
@@ -30,7 +30,7 @@
   justify-content: space-between;
 
   z-index: 10;
-  padding: 0; /* remove extra padding */
+  padding: 0; 
 }
 
   .hud-brand {

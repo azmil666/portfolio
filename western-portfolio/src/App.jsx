@@ -147,6 +147,7 @@ function WesternCity() {
           const mat = child.material;
           mat.roughness = Math.min((mat.roughness || 0.5) + 0.2, 1);
           mat.metalness = Math.max((mat.metalness || 0) - 0.1, 0);
+          
         }
       }
     });
@@ -166,7 +167,7 @@ function FallbackTown() {
 
   return (
     <group>
-      {/* Ground */}
+    
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[120, 120]} />
         <meshStandardMaterial color="#b8965a" roughness={0.95} />
@@ -357,7 +358,7 @@ useEffect(() => {
       <Ground />
 
       <ambientLight 
-  intensity={isNight ? 0.2 : 0.6} 
+  intensity={isNight ? 0.35 : 0.6} 
   color={isNight ? "#8899ff" : "#ffd580"} 
 />
       <directionalLight
@@ -377,6 +378,33 @@ useEffect(() => {
   intensity={isNight ? 0.6 : 1.8}
   color={isNight ? "#9bbcff" : "#ffcc66"}
   castShadow
+/>
+<directionalLight
+  position={[20, 30, -20]}  
+  intensity={isNight ? 1.2 : 1.8}
+  color={isNight ? "#a8c5ff" : "#ffcc66"}
+  castShadow
+/>
+<pointLight
+  position={[18, 3, -12]}  // near hotel
+  intensity={isNight ? 1.5 : 0}
+  color="#ffb347"
+  distance={30}
+  decay={2}
+/>
+<spotLight
+  position={[10, 8, -18]}   // above hotel
+  target-position={[17, 5, -10]} // aim at sign
+  intensity={2}
+  angle={0.4}
+  penumbra={0.5}
+  color="#ffd27a"
+  castShadow
+/>
+<directionalLight
+  position={[ -20, 10, -10 ]}  // from opposite side
+  intensity={isNight ? 0.8 : 0}
+  color="#6fa8ff"
 />
      <hemisphereLight 
   skyColor={isNight ? "#1a2a4f" : "#ffa050"} 
