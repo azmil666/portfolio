@@ -60,7 +60,7 @@
   .hud-name {
   font-family: 'Django', serif;
 
-  font-size: 22px; 
+  font-size: 32px; 
   letter-spacing: 3px;
 
   color: #f0d080;
@@ -90,7 +90,7 @@
 
   .hud-nav-btn {
     font-family: 'Django', serif;
-    font-size: 11px;
+    font-size: 25px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: rgba(220,190,120,0.7);
@@ -515,7 +515,7 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
     .hud { padding: 16px 20px; }
-    .hud-name { font-size: 16px; letter-spacing: 2px; }
+    .hud-name { font-size: 28px; letter-spacing: 2px; }
     .hud-nav-btn { font-size: 9px; padding: 5px 8px; }
     .section-title-wrap { left: 20px; bottom: 140px; }
     .building-hint { left: 20px; bottom: 80px; font-size: 10px; padding: 8px 14px; }
