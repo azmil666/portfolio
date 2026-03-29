@@ -689,7 +689,23 @@ export default function App() {
   const [showHint, setShowHint] = useState(true);
   const containerRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   
+
+  const toggleMusic = () => {
+  const audio = audioRef.current;
+  if (!audio) return;
+
+  if (audio.paused) {
+    audio.volume = 0.15;
+    audio.play();
+    setIsPlaying(true);
+  } else {
+    audio.pause();
+    setIsPlaying(false);
+  }
+};
 
   useEffect(() => {
     const handleWheel = (e) => {
@@ -831,6 +847,9 @@ target: new THREE.Vector3(${data.look.join(", ")})
 
   return (
     <div ref={containerRef} className="app-root">
+    <audio ref={audioRef} loop preload="none">
+  <source src="/music/western.mp3" type="audio/mpeg" />
+</audio>
       <Canvas
         shadows
         camera={{ position: SECTIONS[0].position.toArray(), fov: 55, near: 0.1, far: 400 }}
@@ -854,6 +873,12 @@ target: new THREE.Vector3(${data.look.join(", ")})
   />
 )}
 <AnimatedThemeToggler className="theme-toggle" />
+<button 
+  className={`music-toggle ${isPlaying ? "active" : ""}`} 
+  onClick={toggleMusic}
+>
+  <img src="/guitar.svg" alt="music" />
+</button>
       <SectionTitle currentSection={currentSection} />
       <BuildingHint currentSection={currentSection} onOpen={setOpenPanel} />
       <ProgressBar currentSection={currentSection} />
