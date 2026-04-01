@@ -1,3 +1,20 @@
+html, body {
+  width: 100%;
+  height: 100dvh; 
+  margin: 0;
+  padding: 0;
+  background: #1a0e05; 
+  overflow: hidden; 
+  position: fixed;
+}
+
+#root, .app-root {
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
  @font-face {
   font-family: 'Django';
   src: url('./assets/fonts/The-Django.ttf') format('truetype');
@@ -816,7 +833,23 @@
   75% { transform: translateY(-2px) rotate(1.5deg); }
   100% { transform: translateY(-2px) rotate(0deg); }
 }
+@media (max-width: 768px) {
+  .building-hint {
+    left: 0;
+    right: 0;
+    margin: 0 auto;      
+    width: max-content;   
+    letter-spacing: 1.2px; 
+    padding: 10px 18px;    
+    font-size: 9.5px;      
+    white-space: nowrap;
+    bottom: 110px;     
+  }
 
+  
+  .building-hint::before { left: 8px; }
+  .building-hint::after { right: 8px; }
+}
 /* ──  PANEL OVERLAY ── */
 .panel-overlay {
   position: fixed;

@@ -481,15 +481,21 @@ function SectionTitle({ currentSection }) {
 // ─── CLICKABLE BUILDING HINTS ─────────────────────────────────────────────────
 function BuildingHint({ currentSection, onOpen }) {
   if (currentSection === 0) return null;
-  const section = SECTIONS[currentSection];
+
   const sectionMap = { 1: "about", 2: "projects", 3: "skills", 4: "contact" };
   const id = sectionMap[currentSection];
   if (!id) return null;
+  const cowboyLabels = {
+    about: "View the Dossier",
+    projects: "Check the Bounty Board",
+    skills: "Inspect the Vault",
+    contact: "Send a Telegram"
+  };
 
   return (
     <button className="building-hint" onClick={() => onOpen(id)}>
       <span className="hint-bracket">[</span>
-      <span>Enter {section.subtitle}</span>
+      <span>{cowboyLabels[id]}</span>
       <span className="hint-bracket">]</span>
     </button>
   );
