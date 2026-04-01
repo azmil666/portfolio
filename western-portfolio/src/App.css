@@ -149,35 +149,6 @@
     margin-top: 12px;
   }
 
-  /* ── BUILDING HINT ── */
-  .building-hint {
-    position: fixed;
-    bottom: 110px;
-    left: 48px;
-    z-index: 10;
-    font-family: 'Cinzel', serif;
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: rgba(220,190,100,0.9);
-    background: rgba(10,5,2,0.5);
-    border: 1px solid rgba(212,160,48,0.3);
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    animation: fadeSlideUp 0.5s 0.3s cubic-bezier(0.16,1,0.3,1) both;
-  }
-
-  .building-hint:hover {
-    background: rgba(212,160,48,0.15);
-    border-color: rgba(212,160,48,0.7);
-    color: #f0d080;
-  }
-
-  .hint-bracket {
-    color: #d4a030;
-    margin: 0 6px;
-  }
-
   /* ── SCROLL HINT ── */
  .scroll-hint {
   position: fixed;
@@ -828,4 +799,129 @@
       inset 0 0 20px rgba(212, 160, 48, 0.3),
       0 6px 12px rgba(0, 0, 0, 0.6); 
   }
+}
+
+/*── */
+.building-hint {
+  position: fixed;
+  bottom: 110px;
+  left: 48px;
+  z-index: 10;
+  
+  /* Typography: Engraved/Branded look */
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #fada80;
+  text-transform: uppercase;
+  text-shadow: 
+    -1px -1px 0 rgba(0,0,0,0.8), 
+    1px 1px 0 rgba(255,255,255,0.1); 
+    
+  /* Layout & Shape */
+  padding: 14px 40px; 
+  cursor: pointer;
+  border-radius: 4px; 
+  
+  /* Wood Material Gradient */
+  background: linear-gradient(180deg, #5c3a21 0%, #3b2210 100%);
+  border: 1px solid #1a0f07;
+  
+  /* 3D Thickness & Beveling */
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.15), 
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5),       
+    0 6px 0 #1f1006,                           
+    0 10px 20px rgba(0, 0, 0, 0.7);            
+    
+  transform-origin: top center;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* initial load-in animation */
+  /* animation: fadeSlideUp 0.5s 0.3s cubic-bezier(0.16,1,0.3,1) both; */
+}
+
+/* Hover State: The "Saloon Swing" & "Branding Iron Glow" */
+.building-hint:hover {
+  background: linear-gradient(180deg, #6d4629 0%, #472b15 100%);
+  
+  
+  color: #ffebd6;
+  text-shadow: 
+    0 0 8px rgba(255, 145, 0, 0.8),
+    -1px -1px 0 rgba(0,0,0,0.9);
+  
+  /* Lifts the button and triggers the creak animation */
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.6),
+    0 8px 0 #1f1006,                          
+    0 16px 25px rgba(0, 0, 0, 0.9);
+    
+  animation: saloonCreak 2s ease-in-out infinite;
+}
+
+/* Active State: The heavy physical 'Stomp' */
+.building-hint:active {
+  animation: none; /* Stops the swinging when stepped on */
+  transform: translateY(6px) rotate(0deg); 
+  color: #d4a030; /* Cools down instantly */
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.8);
+  
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.9),       
+    0 0 0 #1f1006,                            
+    0 2px 5px rgba(0, 0, 0, 0.8);             
+}
+
+/* Iron Nails on the edges */
+.building-hint::before,
+.building-hint::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #7a7a7a, #1a1a1a);
+  box-shadow: 
+    inset 1px 1px 2px rgba(0,0,0,0.8), 
+    1px 1px 1px rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.building-hint::before { left: 14px; }
+.building-hint::after { right: 14px; }
+
+/* Make nails gleam slightly on hover */
+.building-hint:hover::before,
+.building-hint:hover::after {
+  background: radial-gradient(circle at 40% 40%, #b8b8b8, #1a1a1a);
+  box-shadow: 
+    inset 1px 1px 2px rgba(0,0,0,0.8), 
+    0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Muted brackets */
+.hint-bracket {
+  color: #a36b35;
+  margin: 0 8px;
+  opacity: 0.8;
+  text-shadow: none;
+  transition: color 0.3s;
+}
+
+/* Brackets catch the glow on hover */
+.building-hint:hover .hint-bracket {
+  color: #d49530;
+}
+
+/* The creaking saloon sign keyframes */
+@keyframes saloonCreak {
+  0% { transform: translateY(-2px) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(-1.5deg); }
+  75% { transform: translateY(-2px) rotate(1.5deg); }
+  100% { transform: translateY(-2px) rotate(0deg); }
 }
