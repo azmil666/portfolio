@@ -8,6 +8,8 @@ import LoadingScreen from "./components/LoadingScreen";
 import MobileNav from "./components/MobileNav";
 import MobileMenu from "./components/MobileMenu";
 import { AnimatedThemeToggler } from "./components/ui/animated-theme-toggler";
+import { CONTENT } from "./data/content";
+import SectionPanel from "./components/panel/SectionPanel";
 
 const SECTIONS = [
   {
@@ -50,76 +52,7 @@ const SECTIONS = [
     fov: 47,
   },
 ]
-const CONTENT = {
-  about: {
-    title: "The Stranger",
-    lines: [
-      "Full-stack developer riding the frontier of modern web.",
-      "Crafting cinematic digital experiences with React, Three.js & Node.",
-      "5 years on the trail — always chasing the next horizon.",
-    ],
-    tags: ["React", "Three.js", "Node.js", "TypeScript"],
-  },
-  projects: {
-    title: "Tales & Bounties",
-    items: [
-  {
-    name: "Loomi",
-    desc: "AI-powered productivity & journaling platform with clean UX and smart insights.",
-    tech: "React · Node · AI",
-    link: "https://github.com/azmil666/Loomi"
-  },
-  {
-    name: "CoinStorm",
-    desc: "Crypto tracking and analytics dashboard with real-time market insights.",
-    tech: "JS · API · Charts",
-    link: "https://github.com/azmil666/coinstorm"
-  },
-  {
-    name: "Classroom",
-    desc: "Frontend system for managing classes, students, and learning workflows.",
-    tech: "React · UI",
-    link: "https://github.com/azmil666/classroom-frontend"
-  },
-  {
-    name: "Kaffa",
-    desc: "Coffee-themed modern web experience with aesthetic UI and interactions.",
-    tech: "HTML · CSS · JS",
-    link: "https://github.com/azmil666/kaffa"
-  },
-],
-  },
-  skills: {
-    title: "Tools of the Trade",
-    categories: [
-      { name: "Frontend", items: ["React", "Three.js / R3F", "GSAP", "HTML/CSS", "TypeScript"] },
-      { name: "Backend", items: ["Node.js", "Flask", "Python", "REST APIs", "SQL"] },
-      { name: "Design", items: ["Figma", "Motion Design", "3D Modeling", "UX Research"] },
-      { name: "Tools", items: ["Git", "Vite", "Docker", "Linux", "VSCode"] },
-    ],
-  },
-  contact: {
-    title: "Send a Telegram",
-    lines: ["Riding into a new challenge.", "Drop a line — I'll meet you at sundown."],
-    links: [
-  { 
-    label: "azmilmohammed369@email.com", 
-    icon: "✉",
-    link: "mailto:azmilmohammed369@email.com"
-  },
-  { 
-    label: "github.com/azmil666", 
-    icon: "◈",
-    link: "https://github.com/azmil666"
-  },
-  { 
-    label: "linkedin.com/in/azmil-mohammed", 
-    icon: "◉",
-    link: "https://linkedin.com/in/azmil-mohammed"
-  },
-],
-  },
-};
+
 
 // ─── EASING UTILITIES ─────────────────────────────────────────────────────────
 function easeInOutCubic(t) {
@@ -478,110 +411,6 @@ function CameraTracker() {
   })
 
   return null
-}
-// ─── SECTION PANEL ────────────────────────────────────────────────────────────
-function SectionPanel({ sectionId, visible, onClose }) {
-  const content = CONTENT[sectionId];
-  if (!content || !visible) return null;
-
-  return (
-    <div className="panel-overlay" onClick={onClose}>
-      <div className="panel-card" onClick={(e) => e.stopPropagation()}>
-        <button className="panel-close" onClick={onClose}>✕</button>
-
-        {sectionId === "about" && (
-          <>
-            <div className="panel-eyebrow">Sheriff's Office · About Me</div>
-            <h2 className="panel-title">{content.title}</h2>
-            <div className="panel-divider" />
-            {content.lines.map((l, i) => (
-              <p key={i} className="panel-body">{l}</p>
-            ))}
-            <div className="panel-tags">
-              {content.tags.map((t) => <span key={t} className="panel-tag">{t}</span>)}
-            </div>
-          </>
-        )}
-
-        {sectionId === "projects" && (
-          <>
-            <div className="panel-eyebrow">The Saloon · Projects</div>
-            <h2 className="panel-title">{content.title}</h2>
-            <div className="panel-divider" />
-            <div className="projects-grid">
-              {content.items.map((p, i) => (
-                <a 
-                  key={i}
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-card"
-                >
-                  <div className="project-num">0{i + 1}</div>
-                  <div className="project-name">{p.name}</div>
-                  <div className="project-desc">{p.desc}</div>
-                  <div className="project-tech">{p.tech}</div>
-                </a>
-              ))}
-              <div className="projects-more">
-  <a 
-    href="https://github.com/azmil666"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="more-btn"
-  >
-    View All on GitHub →
-  </a>
-</div>
-            </div>
-          </>
-        )}
-
-        {sectionId === "skills" && (
-          <>
-            <div className="panel-eyebrow">The Bank · Skills</div>
-            <h2 className="panel-title">{content.title}</h2>
-            <div className="panel-divider" />
-            <div className="skills-grid">
-              {content.categories.map((cat) => (
-                <div key={cat.name} className="skill-category">
-                  <div className="skill-cat-name">{cat.name}</div>
-                  {cat.items.map((s) => (
-                    <div key={s} className="skill-item">{s}</div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {sectionId === "contact" && (
-          <>
-            <div className="panel-eyebrow">The Hotel · Contact</div>
-            <h2 className="panel-title">{content.title}</h2>
-            <div className="panel-divider" />
-            {content.lines.map((l, i) => (
-              <p key={i} className="panel-body">{l}</p>
-            ))}
-            <div className="contact-links">
-              {content.links.map((link) => (
-                  <a 
-                    key={link.label} 
-                    href={link.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="contact-link"
-                  >
-                    <span className="contact-icon">{link.icon}</span>
-                  <span>{link.label}</span>
-                </a>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
 }
 
 // ─── HUD NAVIGATION ───────────────────────────────────────────────────────────
