@@ -18,9 +18,15 @@ export default function SectionPanel({ sectionId, visible, onClose }) {
   return (
     <div className="panel-overlay" onClick={onClose}>
       <div className="panel-card" onClick={(e) => e.stopPropagation()}>
-        <button className="panel-close" onClick={onClose}>✕</button>
-
-        <View content={content} />
+        <div className="panel-border-frame"> 
+          <button className="panel-close" onClick={onClose} aria-label="Close Panel">
+            <span className="close-icon">✕</span>
+          </button>
+          <div className="panel-scroll-area">
+            <View content={content} />
+          </div>
+          
+        </div>
       </div>
     </div>
   );
