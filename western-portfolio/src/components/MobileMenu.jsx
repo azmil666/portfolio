@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function MobileMenu({ onNavClick, setMenuOpen }) {
+export default function MobileMenu({ onNavClick, setMenuOpen, playOpen, playClose }){
   const [open, setOpen] = useState(false);
   useEffect(() => {
   setMenuOpen(open);
@@ -18,13 +18,13 @@ export default function MobileMenu({ onNavClick, setMenuOpen }) {
     };
   }, [open]);
 
-  const handleNav = (id) => {
-    
-    setTimeout(() => {
-      setOpen(false);
-      onNavClick(id);
-    }, 200);
-  };
+ const handleNav = (id) => {
+  playClose(); 
+  setTimeout(() => {
+    setOpen(false);
+    onNavClick(id);
+  }, 200);
+};
 
   return (
     <div className="rdr-mobile-container">
@@ -249,13 +249,23 @@ export default function MobileMenu({ onNavClick, setMenuOpen }) {
       {/* Cinematic Blur Overlay */}
       <div 
         className={`rdr-overlay ${open ? "is-open" : ""}`} 
-        onClick={() => setOpen(false)}
+        onClick={() => {
+  playClose();
+  setOpen(false);
+}}
       />
 
       {/* Custom Morphing Hamburger Icon */}
       <button 
         className={`rdr-hamburger ${open ? "is-open" : ""}`} 
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+  if (!open) {
+    playOpen();
+  } else {
+    playClose();
+  }
+  setOpen(!open);
+}}
         aria-label="Toggle menu"
       >
         <span className="rdr-line rdr-line-1"></span>

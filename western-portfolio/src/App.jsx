@@ -728,9 +728,11 @@ target: new THREE.Vector3(${data.look.join(", ")})
 
       <HUD currentSection={currentSection} onNavClick={handleNavClick} />
       
-      <MobileMenu 
+     <MobileMenu 
   onNavClick={handleNavClick} 
   setMenuOpen={setMenuOpen}
+  playOpen={() => playSfx(openSfx)}
+  playClose={() => playSfx(closeSfx)}
 />
       {!openPanel && !menuOpen && (
   <MobileNav 
