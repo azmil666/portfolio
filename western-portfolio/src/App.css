@@ -665,7 +665,7 @@ html, body {
 
 
 .music-toggle.active {
-  border-color: #fada80;
+  /* border-color: #fada80; */
   background: linear-gradient(135deg, #3a2615 0%, #1a110a 100%);
  
   animation: westernGlow 3s infinite alternate;
