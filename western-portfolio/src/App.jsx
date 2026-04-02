@@ -707,9 +707,12 @@ target: new THREE.Vector3(${data.look.join(", ")})
     currentSection={currentSection}
   />
 )}
-<AnimatedThemeToggler className="theme-toggle" />
+<AnimatedThemeToggler 
+  className={`theme-toggle ${openPanel ? "hide-ui" : ""}`} 
+/>
+
 <button 
-  className={`music-toggle ${isPlaying ? "active" : ""}`} 
+  className={`music-toggle ${isPlaying ? "active" : ""} ${openPanel ? "hide-ui" : ""}`} 
   onClick={toggleMusic}
 >
   <img src="/guitar.svg" alt="music" />
