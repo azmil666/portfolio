@@ -1,6 +1,6 @@
 import GithubIcon from "../components/icons/GithubIcon";
 import LinkedinIcon from "../components/icons/LinkedinIcon";
-import MailFilledIcon from "../components/icons/MailfilledIcon";
+import MailFilledIcon from "../components/icons/MailFilledIcon";
 
 export const CONTENT = {
   about: {
