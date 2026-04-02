@@ -18,7 +18,13 @@ export default function ContactView({ content }) {
             rel="noopener noreferrer"
             className="contact-link"
           >
-            <span className="contact-icon">{link.icon}</span>
+            <span className="contact-icon">
+            {typeof link.icon === "string" ? (
+              link.icon
+            ) : (
+              <link.icon />
+            )}
+          </span>
             <span>{link.label}</span>
           </a>
         ))}

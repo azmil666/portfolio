@@ -1,3 +1,7 @@
+import GithubIcon from "../components/icons/GithubIcon";
+import LinkedinIcon from "../components/icons/LinkedinIcon";
+import MailFilledIcon from "../components/icons/MailfilledIcon";
+
 export const CONTENT = {
   about: {
     title: "The Stranger",
@@ -52,17 +56,17 @@ export const CONTENT = {
     links: [
   { 
     label: "azmilmohammed369@email.com", 
-    icon: "✉",
+    icon: MailFilledIcon,
     link: "mailto:azmilmohammed369@email.com"
   },
   { 
     label: "github.com/azmil666", 
-    icon: "◈",
+    icon: GithubIcon,
     link: "https://github.com/azmil666"
   },
   { 
     label: "linkedin.com/in/azmil-mohammed", 
-    icon: "◉",
+    icon: LinkedinIcon,
     link: "https://linkedin.com/in/azmil-mohammed"
   },
 ],
