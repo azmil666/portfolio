@@ -14,34 +14,34 @@ export const CONTENT = {
   tags: ["React", "Node.js", "Python", "TypeScript", "UI/UX"],
 },
   projects: {
-    title: "Tales & Bounties",
-    items: [
-  {
-    name: "Loomi",
-    desc: "AI-powered productivity & journaling platform with clean UX and smart insights.",
-    tech: "React · Node · AI",
-    link: "https://github.com/azmil666/Loomi"
-  },
-  {
-    name: "CoinStorm",
-    desc: "Crypto tracking and analytics dashboard with real-time market insights.",
-    tech: "JS · API · Charts",
-    link: "https://github.com/azmil666/coinstorm"
-  },
-  {
-    name: "Classroom",
-    desc: "Frontend system for managing classes, students, and learning workflows.",
-    tech: "React · UI",
-    link: "https://github.com/azmil666/classroom-frontend"
-  },
-  {
-    name: "Kaffa",
-    desc: "Coffee-themed modern web experience with aesthetic UI and interactions.",
-    tech: "HTML · CSS · JS",
-    link: "https://github.com/azmil666/kaffa"
-  },
-],
-  },
+  title: "Tales & Bounties",
+  items: [
+    {
+      name: "Loomi",
+      desc: "AI-powered productivity & journaling platform with clean UX and smart insights.",
+      tech: "React · Node.js · Express · Sharp · FastAPI · Python · ML ",
+      link: "https://github.com/azmil666/Loomi"
+    },
+    {
+      name: "CoinStorm",
+      desc: "Crypto tracking and analytics dashboard with real-time market insights.",
+      tech: "Next.js · TypeScript · CoinGecko API · TradingView Charts ",
+      link: "https://github.com/azmil666/coinstorm"
+    },
+    {
+      name: "Classroom",
+      desc: "Frontend system for managing classes, students, and learning workflows.",
+      tech: "React · TypeScript · Express · PostgreSQL · Refine · ShadCN",
+      link: "https://github.com/azmil666/classroom-frontend"
+    },
+    {
+      name: "Kaffa",
+      desc: "Coffee-themed modern web experience with aesthetic UI and interactions.",
+      tech: "React · TailwindCSS · GSAP · Vite · Scroll Animations",
+      link: "https://github.com/azmil666/kaffa"
+    },
+  ],
+},
   skills: {
   title: "What I Work With",
   categories: [
