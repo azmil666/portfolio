@@ -526,9 +526,13 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const openSfx = useRef(null);
+  const closeSfx = useRef(null);
+  const selectSfx = useRef(null);
   
 
   const toggleMusic = () => {
+    playSfx(selectSfx);
   const audio = audioRef.current;
   if (!audio) return;
 
@@ -588,8 +592,24 @@ export default function App() {
       el.removeEventListener("touchend", handleTouch);
     };
   }, [openPanel]);
+  const playSfx = (ref) => {
+  if (!ref?.current) return;
+
+  ref.current.currentTime = 0;
+  ref.current.volume = 1; 
+  ref.current.play();
+};
+const handleOpenPanel = (id) => {
+  playSfx(openSfx);   // 🔊 play sound
+  setOpenPanel(id);   // 📂 open panel
+};
+const handleClosePanel = () => {
+  playSfx(closeSfx);  // 🔊 play close sound
+  setOpenPanel(null); // ❌ close panel
+};
 
   const handleNavClick = (idx) => {
+    playSfx(selectSfx);
     scrollProgress.current = idx / (SECTIONS.length - 1);
   };
   function CameraDebuggerDOM() {
@@ -685,6 +705,17 @@ target: new THREE.Vector3(${data.look.join(", ")})
     <audio ref={audioRef} loop preload="none">
   <source src="/music/western.mp3" type="audio/mpeg" />
 </audio>
+<audio ref={openSfx} preload="auto">
+  <source src="/music/open.mp3" type="audio/mpeg" />
+</audio>
+
+<audio ref={closeSfx} preload="auto">
+  <source src="/music/close.mp3" type="audio/mpeg" />
+</audio>
+
+<audio ref={selectSfx} preload="auto">
+  <source src="/music/select.mp3" type="audio/mpeg" />
+</audio>
       <Canvas
         shadows
         camera={{ position: SECTIONS[0].position.toArray(), fov: 55, near: 0.1, far: 400 }}
@@ -707,9 +738,12 @@ target: new THREE.Vector3(${data.look.join(", ")})
     currentSection={currentSection}
   />
 )}
-<AnimatedThemeToggler 
-  className={`theme-toggle ${openPanel ? "hide-ui" : ""}`} 
-/>
+<div
+  onClick={() => playSfx(selectSfx)}
+  className={openPanel ? "hide-ui" : ""}
+>
+  <AnimatedThemeToggler className="theme-toggle" />
+</div>
 
 <button 
   className={`music-toggle ${isPlaying ? "active" : ""} ${openPanel ? "hide-ui" : ""}`} 
@@ -718,15 +752,15 @@ target: new THREE.Vector3(${data.look.join(", ")})
   <img src="/guitar.svg" alt="music" />
 </button>
       <SectionTitle currentSection={currentSection} />
-      <BuildingHint currentSection={currentSection} onOpen={setOpenPanel} />
+      <BuildingHint currentSection={currentSection} onOpen={handleOpenPanel} />
       <ProgressBar currentSection={currentSection} />
       <ScrollHint visible={showHint} />
 
       <SectionPanel
-        sectionId={openPanel}
-        visible={!!openPanel}
-        onClose={() => setOpenPanel(null)}
-      />
+  sectionId={openPanel}
+  visible={!!openPanel}
+  onClose={handleClosePanel}
+/>
 
       
     </div>
