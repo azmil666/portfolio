@@ -4,14 +4,15 @@ import MailFilledIcon from "../components/icons/MailFilledIcon";
 
 export const CONTENT = {
   about: {
-    title: "The Stranger",
-    lines: [
-      "Full-stack developer riding the frontier of modern web.",
-      "Crafting cinematic digital experiences with React, Three.js & Node.",
-      "5 years on the trail — always chasing the next horizon.",
-    ],
-    tags: ["React", "Three.js", "Node.js", "TypeScript"],
-  },
+  title: "The Builder",
+  lines: [
+    "I build web products that are clean, useful, and feel good to use.",
+    "Mostly working across React, Node, and Python — from UI to backend logic.",
+    "I like turning simple ideas into polished experiences with thoughtful details.",
+    "Still learning, still building — always trying to make the next project better than the last."
+  ],
+  tags: ["React", "Node.js", "Python", "TypeScript", "UI/UX"],
+},
   projects: {
     title: "Tales & Bounties",
     items: [
@@ -42,14 +43,38 @@ export const CONTENT = {
 ],
   },
   skills: {
-    title: "Tools of the Trade",
-    categories: [
-      { name: "Frontend", items: ["React", "Three.js / R3F", "GSAP", "HTML/CSS", "TypeScript"] },
-      { name: "Backend", items: ["Node.js", "Flask", "Python", "REST APIs", "SQL"] },
-      { name: "Design", items: ["Figma", "Motion Design", "3D Modeling", "UX Research"] },
-      { name: "Tools", items: ["Git", "Vite", "Docker", "Linux", "VSCode"] },
-    ],
-  },
+  title: "What I Work With",
+  categories: [
+    {
+      name: "Core Stack",
+      items: ["React", "Three.js (R3F)", "TypeScript", "Node.js", "Python"]
+    },
+    {
+      name: "Frontend",
+      items: ["HTML/CSS", "GSAP", "Tailwind", "Responsive Design"]
+    },
+    {
+      name: "Backend",
+      items: ["Express", "Flask", "FastAPI", "REST APIs"]
+    },
+    {
+      name: "Database",
+      items: ["PostgreSQL", "MongoDB", "SQL"]
+    },
+    {
+      name: "Design",
+      items: ["Figma", "UI Design", "Interaction Design"]
+    },
+    {
+      name: "Also Worked With",
+      items: ["Svelte", "SvelteKit", "Vue", "Next.js", "Flutter"]
+    },
+    {
+      name: "Tools",
+      items: ["Git", "Docker", "Linux", "Vite"]
+    }
+  ]
+},
   contact: {
     title: "Send a Telegram",
     lines: ["Riding into a new challenge.", "Drop a line — I'll meet you at sundown."],
