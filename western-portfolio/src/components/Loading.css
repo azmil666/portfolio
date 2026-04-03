@@ -1,11 +1,11 @@
-/* Sits on top of the entire website */
+
 .loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #c8a55e; /* Dirt Yellow to match your ground */
+  background-color: #c8a55e; 
   display: flex;
   justify-content: center;
   align-items: center;
