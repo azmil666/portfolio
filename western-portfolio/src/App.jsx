@@ -10,12 +10,13 @@ import MobileMenu from "./components/MobileMenu";
 import { AnimatedThemeToggler } from "./components/ui/animated-theme-toggler";
 import { CONTENT } from "./data/content";
 import SectionPanel from "./components/panel/SectionPanel";
+import HeroIntro from "./components/HeroIntro";
 
 const SECTIONS = [
   {
     id: "hero",
     label: null,
-    position: new THREE.Vector3(14.35, 2.6, 11.8),
+    position: new THREE.Vector3(14.35, 2.8, 11.8),
     target: new THREE.Vector3(12.5, 3.2, 2.5),
     fov: 52,
   },
@@ -302,7 +303,7 @@ function WesternSky({ isNight }) {
 }
 
 // ─── SCENE ────────────────────────────────────────────────────────────────────
-function Scene({ scrollProgress, onSectionChange }) {
+function Scene({ scrollProgress, onSectionChange, currentSection }) {
   const [isNight, setIsNight] = useState(false);
 
 useEffect(() => {
@@ -397,6 +398,9 @@ useEffect(() => {
       <Suspense fallback={null }>
         <WesternCity />
       </Suspense>
+      {currentSection === 0 && (
+  <HeroIntro currentSection={currentSection} />
+)}
       {/* <CameraTracker /> */}
       {/* <OrbitControls /> */}
       <CinematicCamera scrollProgress={scrollProgress} onSectionChange={onSectionChange} />
@@ -723,11 +727,17 @@ target: new THREE.Vector3(${data.look.join(", ")})
         gl={{ antialias: true, alpha: false }}
         style={{ background: "#c8883a" }}
       >
-        <Scene scrollProgress={scrollProgress} onSectionChange={setCurrentSection} />
+        <Scene 
+  scrollProgress={scrollProgress} 
+  onSectionChange={setCurrentSection}
+  currentSection={currentSection}
+/>
       </Canvas>
       {/* <CameraDebuggerDOM /> */}
 
       <HUD currentSection={currentSection} onNavClick={handleNavClick} />
+     
+
       
      <MobileMenu 
   onNavClick={handleNavClick} 
