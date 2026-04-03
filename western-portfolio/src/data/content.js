@@ -19,25 +19,25 @@ export const CONTENT = {
     {
       name: "Loomi",
       desc: "AI-powered productivity & journaling platform with clean UX and smart insights.",
-      tech: "React · Node.js · Express · Sharp · FastAPI · Python · ML ",
+      tech: "React · Node.js · Express · Sharp · FastAPI · ML ",
       link: "https://github.com/azmil666/Loomi"
     },
     {
       name: "CoinStorm",
       desc: "Crypto tracking and analytics dashboard with real-time market insights.",
-      tech: "Next.js · TypeScript · CoinGecko API · TradingView Charts ",
+      tech: "Next.js · TypeScript · CoinGecko API · Trade Charts ",
       link: "https://github.com/azmil666/coinstorm"
     },
     {
       name: "Classroom",
       desc: "Frontend system for managing classes, students, and learning workflows.",
-      tech: "React · TypeScript · Express · PostgreSQL · Refine · ShadCN",
+      tech: "React · TypeScript · Express · PostgreSQL · ShadCN",
       link: "https://github.com/azmil666/classroom-frontend"
     },
     {
       name: "Kaffa",
       desc: "Coffee-themed modern web experience with aesthetic UI and interactions.",
-      tech: "React · TailwindCSS · GSAP · Vite · Scroll Animations",
+      tech: "React · TailwindCSS · GSAP  · Scroll Animations",
       link: "https://github.com/azmil666/kaffa"
     },
   ],

@@ -236,7 +236,7 @@ html, body {
     box-shadow: 0 0 10px rgba(212,160,48,0.6);
     transform: scale(1.4);
   }
-  /* ── PROJECTS ── */
+ 
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -244,23 +244,37 @@ html, body {
     margin-top: 4px;
 
   }
-  .project-card {
+ .project-card {
   cursor: pointer;
   text-decoration: none;  
-  color: inherit;         
-}  
+  color: inherit; 
+  position: relative;
+  padding: 24px 28px; 
+  
+  border: 1px solid transparent; 
+  border-radius: 8px; 
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
   .project-card:hover {
-  background: rgba(212,160,48,0.12);
-  border-color: rgba(212,160,48,0.7);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4),
-              0 0 12px rgba(212,160,48,0.25);
-}
- .project-card:active {
-  transform: scale(0.98);
-}             
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(212, 160, 48, 0.25);
+  background: linear-gradient(145deg, rgba(212, 160, 48, 0.08) 0%, transparent 100%);
+  
 
+  box-shadow: 
+    0 12px 24px -6px rgba(0, 0, 0, 0.9),
+    0 4px 8px -2px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.project-card:active {
+  transform: translateY(0) scale(0.99);
+  box-shadow: 
+    0 2px 4px -1px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+ 
   .project-num {
     font-family: 'Cinzel', serif;
     font-size: 10px;
@@ -294,6 +308,18 @@ html, body {
     text-transform: uppercase;
   }
 
+.project-name, .project-desc {
+  transition: color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-name {
+  color: #fff3c7;
+  transform: translateX(4px);
+}
+
+.project-card:hover .project-desc {
+  color: rgba(220, 190, 120, 0.95);
+}
   /* ── SKILLS ── */
   .skills-grid {
     display: grid;
@@ -416,7 +442,7 @@ html, body {
   font-family: 'Cinzel', serif;
   z-index: 999;
 }
-/* ===== MOBILE NAV (FINAL CLEAN) ===== */
+
 
 .mobile-nav {
   display: none;
@@ -437,7 +463,7 @@ html, body {
   }
 
   .hud-nav {
-    display: none; /* hide buttons only */
+    display: none; 
   }
 
 
@@ -578,10 +604,10 @@ html, body {
 
   background-color: #d4a030; 
 
-  -webkit-mask: url('/cowboy.svg') no-repeat center;
+  -webkit-mask: url('/cowboy.png') no-repeat center;
   -webkit-mask-size: contain;
 
-  mask: url('/cowboy.svg') no-repeat center;
+  mask: url('/cowboy.png') no-repeat center;
   mask-size: contain;
 
   filter: drop-shadow(0 0 6px rgba(182,141,76,0.6));
@@ -1094,4 +1120,18 @@ html, body {
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px) scale(0.8);
+}
+.projects-more {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start; 
+  margin-left: 28px; 
+}
+
+@media (max-width: 768px) {
+  .projects-more {
+    justify-content: center; 
+    margin-top: 32px;
+    margin-left: 0; 
+  }
 }

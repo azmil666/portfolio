@@ -9,11 +9,11 @@ export default function AboutView({ content }) {
         <p key={i} className="panel-body">{l}</p>
       ))}
 
-      <div className="panel-tags">
+      {/* <div className="panel-tags">
         {content.tags.map((t) => (
           <span key={t} className="panel-tag">{t}</span>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

@@ -5,6 +5,7 @@ export default function ProjectsView({ content }) {
       <h2 className="panel-title">{content.title}</h2>
       <div className="panel-divider" />
 
+      {/* Grid only contains the project cards now */}
       <div className="projects-grid">
         {content.items.map((p, i) => (
           <a 
@@ -20,9 +21,11 @@ export default function ProjectsView({ content }) {
             <div className="project-tech">{p.tech}</div>
           </a>
         ))}
+      </div>
 
-        <div className="projects-more">
-          <a 
+      {/* Button wrapper is moved OUTSIDE the grid */}
+      <div className="projects-more">
+        <a 
           href="https://github.com/azmil666"
           target="_blank"
           rel="noopener noreferrer"
@@ -86,7 +89,6 @@ export default function ProjectsView({ content }) {
         >
           View All on GitHub →
         </a>
-        </div>
       </div>
     </>
   );
