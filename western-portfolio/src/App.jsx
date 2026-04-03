@@ -394,7 +394,7 @@ useEffect(() => {
 
       <DustParticles />
 
-      <Suspense fallback={<LoadingScreen /> }>
+      <Suspense fallback={null }>
         <WesternCity />
       </Suspense>
       {/* <CameraTracker /> */}
@@ -702,6 +702,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
 
   return (
     <div ref={containerRef} className="app-root">
+      <LoadingScreen />
     <audio ref={audioRef} loop preload="none">
   <source src="/music/western.mp3" type="audio/mpeg" />
 </audio>

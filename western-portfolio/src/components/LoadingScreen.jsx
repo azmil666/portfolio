@@ -1,21 +1,55 @@
-import { Html, useProgress } from "@react-three/drei";
+import { useProgress } from "@react-three/drei";
+import { useEffect, useState } from "react";
+import "./Loading.css";
 
 export default function LoadingScreen() {
-  const { progress } = useProgress();
+  const { active, progress } = useProgress();
+  const [visible, setVisible] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    
+    if (!active && progress >= 100) {
+      const timer = setTimeout(() => {
+        setFadeOut(true);
+      }, 500); 
+      
+   
+      const removeTimer = setTimeout(() => {
+        setVisible(false);
+      }, 1300); 
+
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(removeTimer);
+      };
+    }
+  }, [active, progress]);
+
+  if (!visible) return null;
 
   return (
-    <Html center>
-      <div style={{
-        color: "#f0d080",
-        fontFamily: "Cinzel, serif",
-        fontSize: "18px",
-        textAlign: "center"
-      }}>
-        <div>Loading Town...</div>
-        <div style={{ marginTop: "10px" }}>
-          {progress.toFixed(0)}%
+    <div className={`loading-overlay ${fadeOut ? "fade-out" : ""}`}>
+      <div className="neoleaf-container">
+        
+        <div className="text-wrapper">
+    
+          <h1 className="text-bg">LOADING TOWN</h1>
+        
+          <h1
+            className="text-fill"
+            style={{ clipPath: `inset(${100 - progress}% 0 0 0)` }}
+          >
+            LOADING TOWN
+          </h1>
         </div>
+
+        <div className="progress-bar-container">
+          <span className="loading-label">Saddling up...</span>
+          <span className="loading-percentage">{progress.toFixed(0)}%</span>
+        </div>
+        
       </div>
-    </Html>
+    </div>
   );
 }
