@@ -1,7 +1,7 @@
 export default function ProjectsView({ content }) {
   return (
     <>
-      <div className="panel-eyebrow">The Saloon · Projects</div>
+      <div className="panel-eyebrow">Projects</div>
       <h2 className="panel-title">{content.title}</h2>
       <div className="panel-divider" />
 

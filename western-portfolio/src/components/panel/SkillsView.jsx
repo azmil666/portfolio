@@ -1,7 +1,7 @@
 export default function SkillsView({ content }) {
   return (
     <>
-      <div className="panel-eyebrow">The Bank · Skills</div>
+      <div className="panel-eyebrow">Skills</div>
       <h2 className="panel-title">{content.title}</h2>
       <div className="panel-divider" />
 

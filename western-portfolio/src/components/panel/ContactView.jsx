@@ -1,7 +1,7 @@
 export default function ContactView({ content }) {
   return (
     <>
-      <div className="panel-eyebrow">The Hotel · Contact</div>
+      <div className="panel-eyebrow">Contact</div>
       <h2 className="panel-title">{content.title}</h2>
       <div className="panel-divider" />
 

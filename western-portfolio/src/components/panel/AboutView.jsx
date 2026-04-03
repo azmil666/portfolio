@@ -1,7 +1,7 @@
 export default function AboutView({ content }) {
   return (
     <>
-      <div className="panel-eyebrow">Sheriff's Office · About Me</div>
+      <div className="panel-eyebrow">About Me</div>
       <h2 className="panel-title">{content.title}</h2>
       <div className="panel-divider" />
 
