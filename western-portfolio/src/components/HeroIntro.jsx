@@ -21,9 +21,10 @@ const Nail = ({ position }) => (
 
 
 export default function HeroIntro({ currentSection = 0 }) {
-  const { viewport } = useThree();
-  const isMobile = viewport.width < 6;
-  const boardScale = isMobile ? 0.32 : Math.min(viewport.width / 11, 1);
+  const { size } = useThree();
+  const isMobile = size.width < 768;
+
+  const boardScale = isMobile ? 0.6 : 0.8;
 
   const lines = useMemo(() => [
     { text: 'AZMIL MOHAMMED', size: 0.5, y: 1.0, delay: 0 },
