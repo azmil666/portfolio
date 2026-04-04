@@ -584,18 +584,37 @@ export default function App() {
 
     lastY = y;
   };
-})();
+})
+();
+const handleKeyDown = (e) => {
+  if (openPanel) return;
+
+  if (e.key === "ArrowDown") {
+    const next = Math.min(currentSection + 1, SECTIONS.length - 1);
+    handleNavClick(next);
+    setShowHint(false);
+  }
+
+  if (e.key === "ArrowUp") {
+    const prev = Math.max(currentSection - 1, 0);
+    handleNavClick(prev);
+    setShowHint(false);
+  }
+};
 
     const el = containerRef.current;
     el.addEventListener("wheel", handleWheel, { passive: true });
     el.addEventListener("touchmove", handleTouch, { passive: true });
     el.addEventListener("touchend", handleTouch);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
       el.removeEventListener("wheel", handleWheel);
       el.removeEventListener("touchmove", handleTouch);
       el.removeEventListener("touchend", handleTouch);
+      window.removeEventListener("keydown", handleKeyDown);
+
     };
-  }, [openPanel]);
+  }, [openPanel, currentSection]);
   const playSfx = (ref) => {
   if (!ref?.current) return;
 
