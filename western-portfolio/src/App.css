@@ -1153,3 +1153,22 @@ html, body {
     margin-left: 0; 
   }
 }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(212, 160, 48, 0.25);
+    background: linear-gradient(145deg, rgba(212, 160, 48, 0.08) 0%, transparent 100%);
+  }
+
+  .contact-link:hover {
+    transform: translateY(-3px) scale(1.01);
+  }
+
+  .building-hint:hover {
+    animation: saloonCreak 2s ease-in-out infinite;
+  }
+
+  .hud-nav-btn:hover {
+    color: #f0d080;
+  }
+}
