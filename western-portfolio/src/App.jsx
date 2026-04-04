@@ -230,6 +230,7 @@ function CinematicCamera({ scrollProgress, onSectionChange }) {
   const currentPos = useRef(SECTIONS[0].position.clone());
   const currentTarget = useRef(SECTIONS[0].target.clone());
   const heroDrift = useRef(0);
+  const lastSection = useRef(0);
 
   useEffect(() => {
     camera.position.copy(SECTIONS[0].position);
@@ -272,8 +273,15 @@ function CinematicCamera({ scrollProgress, onSectionChange }) {
     camera.lookAt(currentTarget.current);
 
     // Section detection
-    const newSection = Math.floor(raw * segCount);
-    onSectionChange(Math.min(newSection, segCount));
+    const newSection = Math.min(Math.floor(raw * segCount), segCount);
+
+if (newSection !== lastSection.current) {
+  onSectionChange(newSection);
+  lastSection.current = newSection;
+
+  // 🔊 PLAY SOUND HERE
+  window.dispatchEvent(new Event("section-change"));
+}
   });
 
   return null;
@@ -635,6 +643,17 @@ const handleClosePanel = () => {
     playSfx(selectSfx);
     scrollProgress.current = idx / (SECTIONS.length - 1);
   };
+  useEffect(() => {
+  const handleSectionSound = () => {
+    playSfx(selectSfx);
+  };
+
+  window.addEventListener("section-change", handleSectionSound);
+
+  return () => {
+    window.removeEventListener("section-change", handleSectionSound);
+  };
+}, []);
   function CameraDebuggerDOM() {
   const [data, setData] = useState({
     pos: [0, 0, 0],
@@ -681,6 +700,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
     navigator.clipboard.writeText(text)
     alert("Copied 🚀")
   }
+  
 
   return (
     <div style={{
