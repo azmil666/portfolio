@@ -1,13 +1,14 @@
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
-import React from "react";
+import React, { useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { cn } from "../lib/utils";
 
 export const LinkPreview = ({ children, url }) => {
-    const isMobile = window.matchMedia("(hover: none)").matches;
-    if (isMobile) {
-  return children;
-}
+  const isMobile = window.matchMedia("(hover: none)").matches;
+  if (isMobile) return children;
+
+  const [loaded, setLoaded] = useState(false);
+
   const src = `https://api.microlink.io/?url=${encodeURIComponent(
     url
   )}&screenshot=true&meta=false&embed=screenshot.url`;
@@ -35,19 +36,31 @@ export const LinkPreview = ({ children, url }) => {
   sideOffset={10}
   className="z-[999] "
 >
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.6 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="shadow-xl rounded-xl"
-          style={{ x: translateX }}
-        >
-          <img
-            src={src}
-            width={200}
-            height={125}
-            className="rounded-lg border border-neutral-800"
-          />
-        </motion.div>
+       <motion.div
+  initial={{ opacity: 0, y: 20, scale: 0.6 }}
+  animate={{ opacity: 1, y: 0, scale: 1 }}
+  className="shadow-xl rounded-xl relative overflow-hidden"
+  style={{ x: translateX }}
+>
+
+  
+  {!loaded && (
+  <div className="w-[200px] h-[125px] flex items-center justify-center bg-neutral-900 border border-neutral-800 rounded-lg text-xs text-neutral-400">
+    Loading preview...
+  </div>
+)}
+
+ 
+  <img
+    src={src}
+    width={200}
+    height={125}
+    onLoad={() => setLoaded(true)}
+    className={`rounded-lg border border-neutral-800 transition-opacity duration-300 ${
+      loaded ? "opacity-100" : "opacity-0"
+    }`}
+  />
+</motion.div>
       </HoverCardPrimitive.Content>
     </HoverCardPrimitive.Root>
   );
