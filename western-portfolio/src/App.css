@@ -1205,3 +1205,11 @@ html, body {
 button, a, div {
   touch-action: manipulation;
 }
+
+html:not(.dark) .scroll-hint span {
+  color: rgba(44, 24, 5, 0.7);
+}
+
+html:not(.dark) .scroll-horse {
+  color: #291707;
+}
