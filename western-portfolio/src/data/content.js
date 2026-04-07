@@ -6,9 +6,9 @@ export const CONTENT = {
   about: {
   title: "The Builder",
   lines: [
-    "I build web products that are clean, useful, and feel good to use.",
+    "I build interactive web experiences that are clean, useful, and feel great to use.",
     "Mostly working across React, Node, and Python — from UI to backend logic.",
-    "I like turning simple ideas into polished experiences with thoughtful details.",
+    "I focus on turning simple ideas into polished, interactive experiences with attention to detail.",
     "Still learning, still building — always trying to make the next project better than the last."
   ],
   tags: ["React", "Node.js", "Python", "TypeScript", "UI/UX"],
@@ -26,7 +26,7 @@ export const CONTENT = {
     {
       name: "CoinStorm",
       desc: "Crypto tracking and analytics dashboard with real-time market insights.",
-      tech: "Next.js · TypeScript · CoinGecko API · Trade Charts ",
+      tech: "Next.js · TypeScript · CoinGecko API ·  Charts ",
       github: "https://github.com/azmil666/coinstorm",
       live:"https://coinstorm.vercel.app"
     },
@@ -81,7 +81,7 @@ export const CONTENT = {
 },
   contact: {
     title: "Send a Telegram",
-    lines: ["Riding into a new challenge.", "Drop a line — I'll meet you at sundown."],
+    lines: ["Always ready for the next challenge.", "Drop a line — I'll meet you at sundown."],
     links: [
   { 
     label: "azmilmohammed369@email.com", 

@@ -1213,3 +1213,17 @@ html:not(.dark) .scroll-hint span {
 html:not(.dark) .scroll-horse {
   color: #291707;
 }
+.shimmer {
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 215, 160, 0.15),
+    transparent
+  );
+  animation: shimmerMove 1.5s infinite;
+}
+
+@keyframes shimmerMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

@@ -21,11 +21,12 @@ export const LinkPreview = ({ children, url }) => {
     const offset = (event.clientX - rect.left - rect.width / 2) / 2;
     x.set(offset);
   };
+  
 
   return (
     <HoverCardPrimitive.Root openDelay={150} closeDelay={100}>
       <HoverCardPrimitive.Trigger asChild>
-  <div className="w-full" onMouseMove={handleMouseMove}>
+  <div className="w-full" onMouseMove={handleMouseMove} onMouseEnter={() => setLoaded(false)} > 
     {children}
   </div>
 </HoverCardPrimitive.Trigger>
@@ -44,8 +45,17 @@ export const LinkPreview = ({ children, url }) => {
 >
 
   
-  {!loaded && (
-  <div className="w-[200px] h-[125px] flex items-center justify-center bg-neutral-900 border border-neutral-800 rounded-lg text-xs text-neutral-400">
+ {!loaded && (
+  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center 
+  bg-[#1a1208] border border-[#3a2a14] rounded-lg 
+  text-[11px] tracking-wider text-[#f5e6c8] overflow-hidden">
+
+   
+    <div className="absolute inset-0 shimmer" />
+
+    
+    <img src="/compass.svg" className="w-4 mb-1 opacity-80" />
+
     Loading preview...
   </div>
 )}
