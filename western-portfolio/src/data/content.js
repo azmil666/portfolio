@@ -32,7 +32,7 @@ export const CONTENT = {
     },
     {
       name: "Classroom",
-      desc: "Frontend system for managing classes, students, and learning workflows.",
+      desc: "Full Stack system for managing classes, students, and learning workflows.",
       tech: "React · TypeScript · Express · PostgreSQL · ShadCN",
       github: "https://github.com/azmil666/classroom-frontend",
       live:"https://classroom-frontend-nu.vercel.app"
