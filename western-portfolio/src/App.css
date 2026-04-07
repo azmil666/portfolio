@@ -318,9 +318,7 @@ html, body {
 .project-card:hover .project-desc {
   color: rgba(220, 190, 120, 0.95);
 } */
- .project-card:hover {
-  opacity: 0.25;
-}
+ 
   /* ── SKILLS ── */
   .skills-grid {
     display: grid;
@@ -1154,21 +1152,13 @@ html, body {
     margin-left: 0; 
   }
 }
-@media (hover: hover) and (pointer: fine) {
-  .project-card:hover {
-    opacity: 0.25;
-  }
-}
+
 @media (hover: hover) and (pointer: fine) {
 
   .hud-nav-btn:hover {
     color: #f0d080;
     border-bottom-color: #d4a030;
     text-shadow: 0 0 12px rgba(212,160,48,0.5);
-  }
-
-  .project-card:hover {
-    opacity: 0.25;
   }
 
   .contact-link:hover {
@@ -1226,4 +1216,19 @@ html:not(.dark) .scroll-horse {
 @keyframes shimmerMove {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
+}
+.project-card:hover .project-content {
+  opacity: 0.25;
+}
+.project-content {
+  transition: opacity 0.3s ease;
+}
+@media (hover: none) {
+  .project-card:hover .project-content {
+    opacity: 1;
+  }
+}
+
+.project-card:hover button {
+  opacity: 100% !important;
 }

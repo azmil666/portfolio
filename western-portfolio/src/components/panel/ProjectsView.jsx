@@ -9,22 +9,78 @@ export default function ProjectsView({ content }) {
 
       <div className="projects-grid">
   {content.items.map((p, i) => (
-    <LinkPreview key={i} url={p.live || p.github}>
-      <a 
-        href={p.live || p.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="project-card"
+    
+    <div 
+      key={i}
+      className="project-card"
+      style={{ position: "relative" }}
+    >
+
+      
+      <LinkPreview url={p.live || p.github}>
+        <div
+          className="project-content"
+          style={{
+            transition: "opacity 0.3s ease",
+            cursor: "pointer"
+          }}
+          onClick={() => window.open(p.live || p.github, "_blank")}
+        >
+          <div className="project-num">0{i + 1}</div>
+          <div className="project-name">{p.name}</div>
+          <div className="project-desc">{p.desc}</div>
+          <div className="project-tech">{p.tech}</div>
+        </div>
+      </LinkPreview>
+
+      <div
+        style={{
+          marginTop: "12px",
+          display: "flex",
+          gap: "8px"
+        }}
       >
-        <div className="project-num">0{i + 1}</div>
-        <div className="project-name">{p.name}</div>
-        <div className="project-desc">{p.desc}</div>
-        <div className="project-tech">{p.tech}</div>
-      </a>
-    </LinkPreview>
+        <button
+          onClick={() => window.open(p.github, "_blank")}
+          style={{
+            fontFamily: "Cinzel, serif",
+            fontSize: "10px",
+            letterSpacing: "1.5px",
+            textTransform: "uppercase",
+
+            padding: "6px 12px",
+            borderRadius: "3px",
+
+            color: "#cfcfcf",
+            border: "1px solid rgba(255,255,255,0.2)",
+            background: "rgba(255,255,255,0.05)",
+
+            cursor: "pointer",
+            transition: "all 0.2s ease"
+          }}
+          onMouseEnter={(e) => {
+            if (window.innerWidth <= 768) return;
+            e.target.style.color = "#fff";
+            e.target.style.border = "1px solid rgba(255,255,255,0.4)";
+            e.target.style.background = "rgba(255,255,255,0.12)";
+            e.target.style.transform = "translateY(-1px)";
+          }}
+          onMouseLeave={(e) => {
+            if (window.innerWidth <= 768) return;
+            e.target.style.color = "#cfcfcf";
+            e.target.style.border = "1px solid rgba(255,255,255,0.2)";
+            e.target.style.background = "rgba(255,255,255,0.05)";
+            e.target.style.transform = "translateY(0)";
+          }}
+        >
+          View Code
+        </button>
+      </div>
+
+    </div>
+
   ))}
 </div>
-
       <div className="projects-more">
         <a 
           href="https://github.com/azmil666"
