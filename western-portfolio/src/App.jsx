@@ -11,6 +11,7 @@ import { AnimatedThemeToggler } from "./components/ui/animated-theme-toggler";
 import { CONTENT } from "./data/content";
 import SectionPanel from "./components/panel/SectionPanel";
 import HeroIntro from "./components/HeroIntro";
+import TutorialHint from "./components/TutorialHint";
 
 const SECTIONS = [
   {
@@ -746,6 +747,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
   return (
     <div ref={containerRef} className="app-root">
       <LoadingScreen />
+      <TutorialHint />
     <audio ref={audioRef} loop preload="none">
   <source src="/music/western.mp3" type="audio/mpeg" />
 </audio>
