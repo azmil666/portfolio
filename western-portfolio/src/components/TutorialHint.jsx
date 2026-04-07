@@ -1,39 +1,33 @@
-import horseIcon from "/horse.png";
-import buildingIcon from "/cabin.png";
-import compassIcon from "/compass.svg";
-import guitarIcon from "/guitar.svg";
-import cowboyIcon from "/cowboy.png";
-import sunIcon from "/sun.svg";
-import moonIcon from "/moon.svg";
 import { useState, useEffect } from "react";
+
 
 const HINTS = [
   {
-    icon: horseIcon,
+    icon: "/horse.png",
     title: "Ride Through Town",
     body: "Scroll up & down — or use your Arrow Keys — to ride the cinematic trail through the western town.",
     keys: ["↑", "↓", "Scroll"],
   },
   {
-    icon: buildingIcon,
+    icon:  "/cabin.png",
     title: "Explore Each Building",
     body: "Every building is a chapter of my story. When you reach a new district, press the glowing button to open its dossier.",
     keys: ["[ Enter Building ]"],
   },
   {
-    icon: compassIcon,
+    icon: "/compass.svg",
     title: "The Sheriff's HUD",
     body: "Use the top navbar to fast-travel between districts — About, Projects, Skills, and Contact.",
     keys: ["Top Nav"],
   },
   {
-    icon: guitarIcon,
+    icon: "/guitar.svg",
     title: "The Saloon Ambience",
     body: "Hit the guitar button to let the western soundtrack play. Toggle the sun/moon to switch between day and night.",
-    keys: ["Music", "Theme"], // we’ll style these next
+    keys: ["Music", "Theme"], 
   },
   {
-    icon: cowboyIcon,
+    icon: "/cowboy.png",
     title: "You're Ready, Partner",
     body: "That's all you need to know. The trail awaits — ride safe, and keep your eyes peeled for bounties.",
     keys: [],
