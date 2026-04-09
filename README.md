@@ -1,16 +1,84 @@
-# React + Vite
+# 🎮 Western 3D Portfolio(Threejs)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="/docs/ss.png" alt="Portfolio Preview" width="100%" />
+</p>
 
-Currently, two official plugins are available:
+An immersive, interactive portfolio built to go beyond the traditional scroll-based experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Instead of static sections, this portfolio is designed as a **3D western-themed environment** where users explore a “town” — each space representing a part of myself, skills, and projects.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🌐 Live Website
+🔗 https://www.azmil.xyz
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Concept
+
+Most portfolios are static.
+
+This project explores a different approach — turning a portfolio into an **experience**:
+- Movement replaces scrolling
+- Exploration replaces navigation
+- Interaction replaces passive viewing
+
+The goal was to create something **memorable, intuitive, and engaging** while still maintaining usability.
+
+---
+
+## ⚙️ Tech Stack
+
+- **React** – UI structure and state management
+- **Three.js** – 3D rendering and scene control
+- **JavaScript (ES6+)** – Core logic
+- **CSS** – Styling and layout
+
+---
+
+## 🚀 Features
+
+- 🎥 **Cinematic Navigation** – Smooth camera-based transitions
+- 🏜️ **3D Environment** – Western-inspired interactive world
+- 🧭 **Multiple Navigation Options** – Scroll, navigation bar, and slider
+- 🧩 **Interactive Projects** – Explore projects within the environment
+- 🎵 **Sound Design** – Optional music and sound effects
+- 🌗 **Dynamic Theme** – Day/Night mode toggle
+- ⚡ **Performance Focused** – Optimized interactions and rendering
+
+---
+
+## 🧠 Key Learnings
+
+- Designing intuitive UX in a non-traditional interface
+- Managing 3D scenes efficiently in the browser
+- Balancing performance with visual quality
+- Creating smooth, responsive animations
+- Structuring interactive storytelling in web design
+
+---
+
+## 🧩 Challenges
+
+- Ensuring smooth performance across devices
+- Making navigation intuitive in a 3D space
+- Avoiding overwhelming the user while keeping it engaging
+- Fine-tuning camera movement and transitions
+
+---
+
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/azmil666/portfolio
+cd portfolio
+npm install
+npm run dev
+```
+
+---
+
+## 📬 Feedback
+Feel free to explore the portfolio and share your thoughts!
