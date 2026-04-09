@@ -1,7 +1,7 @@
 # 🎮 Western 3D Portfolio(Threejs)
 
 <p align="center">
-  <img src="/docs/ss.png" alt="Portfolio Preview" width="100%" />
+  <img src="/docs/ss.webp" alt="Portfolio Preview" width="100%" />
 </p>
 
 An immersive, interactive portfolio built to go beyond the traditional scroll-based experience.
