@@ -15,7 +15,6 @@ html, body {
   position: fixed; 
   top: 0;
   left: 0;
-  position: relative;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
  @font-face {
@@ -31,9 +30,9 @@ html, body {
 
   .app-root {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
-    position: relative;
+    position: fixed;
     background: #2a1a0a;
     
   }
@@ -413,7 +412,7 @@ html, body {
   /* ── VIGNETTE ── */
   .app-root::after {
     content: '';
-    position: fixed;
+    position: absolute;
     inset: 0;
     pointer-events: none;
     background: radial-gradient(ellipse at center, transparent 55%, rgba(10,5,0,0.65) 100%);
