@@ -561,7 +561,7 @@ export default function App() {
 
   useEffect(() => {
     const handleWheel = (e) => {
-      if (openPanel) return;
+      if (openPanel || showHint) return;
       scrollProgress.current = Math.min(
         1,
         Math.max(0, scrollProgress.current + e.deltaY * 0.00015)
@@ -573,7 +573,7 @@ export default function App() {
   let lastY = null;
 
   return (e) => {
-    if (openPanel) return;
+    if (openPanel || showHint) return;
 
     if (!e.touches || e.touches.length === 0) {
       lastY = null;
@@ -596,7 +596,7 @@ export default function App() {
 })
 ();
 const handleKeyDown = (e) => {
-  if (openPanel) return;
+  if (openPanel || showHint) return;
 
   if (e.key === "ArrowDown") {
     const next = Math.min(currentSection + 1, SECTIONS.length - 1);
@@ -623,7 +623,7 @@ const handleKeyDown = (e) => {
       window.removeEventListener("keydown", handleKeyDown);
 
     };
-  }, [openPanel, currentSection]);
+  }, [openPanel, currentSection, showHint]);
   const playSfx = (ref) => {
   if (!ref?.current) return;
 
@@ -747,7 +747,10 @@ target: new THREE.Vector3(${data.look.join(", ")})
   return (
     <div ref={containerRef} className="app-root">
       <LoadingScreen />
-      <TutorialHint />
+     <TutorialHint 
+  visible={showHint}
+  onClose={() => setShowHint(false)} 
+/>
     <audio ref={audioRef} loop preload="none">
   <source src="/music/western.mp3" type="audio/mpeg" />
 </audio>

@@ -33,29 +33,30 @@ const HINTS = [
     keys: [],
   },
 ];
-export default function TutorialHint() {
-  const [visible, setVisible] = useState(false);
+export default function TutorialHint({ visible, onClose }) {
+  // const [visible, setVisible] = useState(false);
   const [step, setStep] = useState(0);
   const [closing, setClosing] = useState(false);
   const [animDir, setAnimDir] = useState("in"); 
 
-  useEffect(() => {
-    const seen = sessionStorage.getItem("wpt-hint-seen");
-    if (!seen) {
+  // useEffect(() => {
+  //   const seen = sessionStorage.getItem("wpt-hint-seen");
+  //   if (!seen) {
       
-      const t = setTimeout(() => setVisible(true), 2200);
-      return () => clearTimeout(t);
-    }
-  }, []);
+  //     const t = setTimeout(() => setVisible(true), 2200);
+  //     return () => clearTimeout(t);
+  //   }
+  // }, []);
 
   const dismiss = () => {
-    setClosing(true);
-    setTimeout(() => {
-      setVisible(false);
-      setClosing(false);
-      sessionStorage.setItem("wpt-hint-seen", "1");
-    }, 500);
-  };
+  setClosing(true);
+  setTimeout(() => {
+    setClosing(false);
+    sessionStorage.setItem("wpt-hint-seen", "1");
+
+    if (onClose) onClose(); 
+  }, 500);
+};
 
   const next = () => {
     if (step >= HINTS.length - 1) {
