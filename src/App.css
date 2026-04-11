@@ -1240,6 +1240,3 @@ html:not(.dark) .scroll-horse {
 html, body {
   overscroll-behavior: none;
 }
-#root, .app-root {
-  min-height: 100dvh;
-}
