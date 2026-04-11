@@ -4,7 +4,7 @@ html, body {
   overflow-x: hidden;
   overflow: hidden; 
   height: 100%;
-  position: relative;
+  position: fixed;
 }
 
 #root, .app-root {
@@ -1244,3 +1244,7 @@ html, body {
   
   background: #1a0e05; 
 }  
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
