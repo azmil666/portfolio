@@ -766,7 +766,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
         shadows
         camera={{ position: SECTIONS[0].position.toArray(), fov: 55, near: 0.1, far: 400 }}
         gl={{ antialias: true, alpha: false }}
-        style={{ background: "#c8883a" }}
+        style={{ background: "#1a0e05" }}
       >
         <Scene 
   scrollProgress={scrollProgress} 
