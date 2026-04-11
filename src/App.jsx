@@ -789,7 +789,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
   playOpen={() => playSfx(openSfx)}
   playClose={() => playSfx(closeSfx)}
 />
-      {!openPanel && !menuOpen && (
+      {!showHint && !openPanel && !menuOpen && (
   <MobileNav 
     onNavClick={handleNavClick} 
     currentSection={currentSection}
@@ -799,15 +799,23 @@ target: new THREE.Vector3(${data.look.join(", ")})
   onClick={() => playSfx(selectSfx)}
   className={openPanel ? "hide-ui" : ""}
 >
-  <AnimatedThemeToggler className="theme-toggle" />
+  {!showHint && (
+  <div
+    onClick={() => playSfx(selectSfx)}
+    className={openPanel ? "hide-ui" : ""}
+  >
+    <AnimatedThemeToggler className="theme-toggle" />
+  </div>
+)}
 </div>
-
-<button 
-  className={`music-toggle ${isPlaying ? "active" : ""} ${openPanel ? "hide-ui" : ""}`} 
-  onClick={toggleMusic}
->
-  <img src="/guitar.svg" alt="music" />
-</button>
+{!showHint && (
+  <button 
+    className={`music-toggle ${isPlaying ? "active" : ""} ${openPanel ? "hide-ui" : ""}`} 
+    onClick={toggleMusic}
+  >
+    <img src="/guitar.svg" alt="music" />
+  </button>
+)}
       <SectionTitle currentSection={currentSection} />
       <BuildingHint currentSection={currentSection} onOpen={handleOpenPanel} />
       <ProgressBar currentSection={currentSection} />
