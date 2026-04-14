@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   SiHtml5,
   SiJavascript,
@@ -20,233 +20,164 @@ import {
 } from "react-icons/si";
 
 const SKILLS = [
-  {
-    title: "Frontend",
-    items: [
-      { name: "HTML", icon: SiHtml5 },
-      { name: "CSS", icon: SiCss },
-      { name: "JavaScript", icon: SiJavascript },
-      { name: "TypeScript", icon: SiTypescript },
-      { name: "React", icon: SiReact },
-    ],
-  },
-  {
-    title: "Backend",
-    items: [
-      { name: "Node.js", icon: SiNodedotjs },
-      { name: "Express", icon: SiExpress },
-      { name: "FastAPI", icon: SiFastapi },
-    ],
-  },
-  {
-    title: "Database",
-    items: [
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "MySQL", icon: SiMysql },
-    ],
-  },
-  {
-    title: "Languages",
-    items: [
-      { name: "Python", icon: SiPython },
-      { name: "C", icon: SiC },
-    ],
-  },
-  {
-    title: "Also Worked With",
-    items: [
-      { name: "Svelte", icon: SiSvelte },
-      { name: "SvelteKit", icon: SiSvelte },
-    ],
-  },
-  {
-    title: "Design & Tools",
-    items: [
-      { name: "Figma", icon: SiFigma },
-      { name: "Linux", icon: SiLinux },
-      { name: "Git", icon: SiGit },
-    ],
-  },
+  { name: "HTML", icon: SiHtml5 },
+  { name: "CSS", icon: SiCss },
+  { name: "JavaScript", icon: SiJavascript },
+  { name: "TypeScript", icon: SiTypescript },
+  { name: "React", icon: SiReact },
+  { name: "Node.js", icon: SiNodedotjs },
+  { name: "Express", icon: SiExpress },
+  { name: "FastAPI", icon: SiFastapi },
+  { name: "MongoDB", icon: SiMongodb },
+  { name: "PostgreSQL", icon: SiPostgresql },
+  { name: "MySQL", icon: SiMysql },
+  { name: "Python", icon: SiPython },
+  { name: "C", icon: SiC },
+  { name: "Svelte", icon: SiSvelte },
+  { name: "SvelteKit", icon: SiSvelte },
+  { name: "Figma", icon: SiFigma },
+  { name: "Linux", icon: SiLinux },
+  { name: "Git", icon: SiGit },
 ];
 
-// --- Injected styles ---
-// --- Injected styles ---
 const styleTag = `
+  @font-face {
+    font-family: 'DjangoFont';
+    src: url('/fonts/django-font.woff2') format('woff2'),
+         url('/fonts/django-font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
 
-  /* Base layout (Mobile) */
-  .skills-inventory {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    width: 100%;
+  @keyframes popIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      box-shadow: 0px 0px 0px rgba(198, 161, 91, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      box-shadow: 4px 4px 0px rgba(198, 161, 91, 0.5); 
+    }
   }
 
-  /* ── Category title ── */
-  .inventory-category-title {
-    font-family: 'Cinzel', 'Rye', serif;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #c6a15b;
-    margin-bottom: 1rem;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 6px;
-  }
-  .inventory-category-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    width: 0%;
-    background: linear-gradient(90deg, #c6a15b, transparent);
-    transition: width 0.45s ease;
-  }
-  .inventory-category:hover .inventory-category-title::after {
-    width: 100%;
-  }
-
-  /* ── Grid ── */
-  .inventory-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
-    gap: 0.75rem;
-  }
-
-  /* ── Skill card ── */
-  .inventory-item {
-    position: relative;
+  .skills-pill-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    justify-content: flex-start; 
+    width: 100%;
+    padding-top: 1rem;
+  }
+
+  /* ── Pill card ── */
+  .skill-pill {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    padding: 1rem 0.5rem 0.85rem;
-    border-radius: 8px;
-    border: 1px solid rgba(198, 161, 91, 0.14);
-    background: rgba(198, 161, 91, 0.03);
+    gap: 0.6rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    border: 2px solid rgba(198, 161, 91, 0.8); 
+    background: rgba(198, 161, 91, 0.05);
     cursor: default;
-    overflow: hidden;
-    transition:
-      transform 0.25s ease,
-      border-color 0.25s ease,
-      background 0.25s ease,
-      box-shadow 0.25s ease;
+    
+    /* Set initial state for animation */
+    opacity: 0; 
+    transform: translateY(20px) scale(0.9);
+    
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Radial spotlight overlay */
-  .inventory-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 8px;
-    background: radial-gradient(circle at 50% 0%, rgba(198, 161, 91, 0.09) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+  .skills-pill-container.is-visible .skill-pill {
+    /* The cubic-bezier creates a subtle premium "overshoot" or bounce effect */
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   }
 
-  /* Hover — desktop */
+  /* Hover & Interaction */
   @media (hover: hover) {
-    .inventory-item:hover {
-      transform: translateY(-4px) scale(1.04);
-      border-color: rgba(198, 161, 91, 0.55);
-      background: rgba(198, 161, 91, 0.07);
-      box-shadow:
-        0 0 12px rgba(198, 161, 91, 0.18),
-        0 6px 24px rgba(0, 0, 0, 0.35);
-    }
-    .inventory-item:hover::before {
-      opacity: 1;
-    }
-    .inventory-item:hover .inventory-icon {
-      color: #e7c98b;
-      filter: drop-shadow(0 0 6px rgba(231, 201, 139, 0.5));
-    }
-    .inventory-item:hover .inventory-label {
-      color: #e7c98b;
+    .skills-pill-container.is-visible .skill-pill:hover {
+      transform: translate(2px, 2px) scale(1);
+      box-shadow: 2px 2px 0px rgba(198, 161, 91, 0.8);
+      background: rgba(198, 161, 91, 0.1);
     }
   }
 
-  /* Tap feedback — mobile */
   @media (hover: none) {
-    .inventory-item:active {
-      transform: scale(0.95);
-      border-color: rgba(198, 161, 91, 0.4);
-      background: rgba(198, 161, 91, 0.08);
+    .skills-pill-container.is-visible .skill-pill:active {
+      transform: translate(2px, 2px) scale(1);
+      box-shadow: 2px 2px 0px rgba(198, 161, 91, 0.8);
+      background: rgba(198, 161, 91, 0.12);
     }
   }
 
   /* Icon */
-  .inventory-icon {
-    font-size: 1.6rem;
-    color: rgba(198, 161, 91, 0.7);
-    transition: color 0.25s ease, filter 0.25s ease;
-    flex-shrink: 0;
+  .skill-icon {
+    font-size: 1.1rem;
+    color: #c6a15b;
   }
 
   /* Label */
-  .inventory-label {
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    font-weight: 400;
+  .skill-label {
+    font-family: 'Cinzel', serif; 
+    font-size: 0.8rem;
+    font-weight: 600;
     letter-spacing: 0.08em;
-    color: rgba(198, 161, 91, 0.55);
-    text-align: center;
+    color: #c6a15b;
     text-transform: uppercase;
     white-space: nowrap;
-    transition: color 0.25s ease;
   }
 
-  /* Mobile grid tightening */
+  /* Mobile tightening */
   @media (max-width: 480px) {
-    .inventory-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.6rem;
+    .skills-pill-container {
+      gap: 0.8rem;
+      justify-content: center; 
     }
-    .inventory-item {
-      padding: 0.85rem 0.4rem 0.7rem;
+    .skill-pill {
+      padding: 0.5rem 1.1rem;
+      border-width: 1.5px;
     }
-    .inventory-icon {
-      font-size: 1.35rem;
+    @keyframes popInMobile {
+      0% { opacity: 0; transform: translateY(15px) scale(0.9); box-shadow: 0 0 0 transparent; }
+      100% { opacity: 1; transform: translateY(0) scale(1); box-shadow: 3px 3px 0px rgba(198, 161, 91, 0.5); }
     }
-    .inventory-label {
-      font-size: 0.52rem;
+    .skills-pill-container.is-visible .skill-pill {
+      animation: popInMobile 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
-  }
-
-  /* Tablet (2 Columns) */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    .skills-inventory {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.5rem 1.5rem;
-      align-items: start; /* Prevents uneven vertical stretching */
+    .skill-icon {
+      font-size: 1rem;
     }
-    .inventory-grid {
-      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    }
-  }
-
-  /* Wide desktop (3 Columns to prevent scrolling) */
-  @media (min-width: 1024px) {
-    .skills-inventory {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem 2rem;
-      align-items: start;
-    }
-    .inventory-grid {
-      grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-      gap: 0.85rem;
+    .skill-label {
+      font-size: 0.7rem;
     }
   }
 `;
 
 export default function SkillsView() {
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); 
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <style>{styleTag}</style>
@@ -255,23 +186,23 @@ export default function SkillsView() {
       <h2 className="panel-title">What I Work With</h2>
       <div className="panel-divider" />
 
-      <div className="skills-inventory">
-        {SKILLS.map((category) => (
-          <div key={category.title} className="inventory-category">
-            <div className="inventory-category-title">{category.title}</div>
-            <div className="inventory-grid">
-              {category.items.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.name} className="inventory-item">
-                    <Icon className="inventory-icon" />
-                    <span className="inventory-label">{item.name}</span>
-                  </div>
-                );
-              })}
+      <div 
+        ref={containerRef} 
+        className={`skills-pill-container ${isVisible ? 'is-visible' : ''}`}
+      >
+        {SKILLS.map((item, index) => {
+          const Icon = item.icon;
+          return (
+            <div 
+              key={item.name} 
+              className="skill-pill"
+              style={{ animationDelay: `${index * 0.05}s` }} 
+            >
+              {Icon && <Icon className="skill-icon" />}
+              <span className="skill-label">{item.name}</span>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );
