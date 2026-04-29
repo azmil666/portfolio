@@ -31,11 +31,11 @@ export const CONTENT = {
       live:"https://coinstorm.vercel.app"
     },
     {
-      name: "Classroom",
-      desc: "Full Stack system for managing classes, students, and learning workflows.",
-      tech: "React · TypeScript · Express · PostgreSQL · ShadCN",
-      github: "https://github.com/azmil666/classroom-frontend",
-      live:"https://classroom-frontend-nu.vercel.app"
+      name: "Neuro-drive",
+      desc: "Self-driving car simulation with a neural network that learns and evolves in real time directly in the browser.",
+      tech: "Html · CSS · Javascript · AI · Neural Network",
+      github: "https://github.com/azmil666/neuro-drive",
+      live:"https://neuro-drive-zeta.vercel.app"
     },
     {
       name: "Kaffa",
