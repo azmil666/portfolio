@@ -28,7 +28,7 @@ export default function HeroIntro({ currentSection = 0 }) {
 
   const lines = useMemo(() => [
     { text: 'AZMIL MOHAMMED', size: 0.5, y: 1.0, delay: 0 },
-    { text: 'Computer Science Student (Year 2)', size: 0.22, y: 0.2, delay: 0.22 },
+    { text: 'Computer Science Student (Year 3)', size: 0.22, y: 0.2, delay: 0.22 },
     { text: 'Kochi, India', size: 0.2, y: -0.3, delay: 0.44, hasPin: true },
     { text: 'Turning ideas into interactive, real-world web experiences', size: 0.19, y: -0.9, delay: 0.66 },
   ], []);

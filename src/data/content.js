@@ -38,11 +38,11 @@ export const CONTENT = {
       live:"https://neuro-drive-zeta.vercel.app"
     },
     {
-      name: "Kaffa",
-      desc: "Coffee-themed modern web experience with aesthetic UI and interactions.",
-      tech: "React · TailwindCSS · GSAP  · Scroll Animations",
-      github: "https://github.com/azmil666/kaffa",
-      live:"https://kaffa-kohl.vercel.app"
+      name: "LeaveFlow",
+      desc: "Role-based leave management app with employee submissions and manager approvals with Supabase authentication.",
+      tech: "Flutter · Dart · Supabase · PostgreSQL",
+      github: "https://github.com/azmil666/leave_application",
+      live: "https://leaveapplication-chi.vercel.app"
     },
   ],
 },

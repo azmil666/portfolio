@@ -17,6 +17,8 @@ import {
   SiLinux,
   SiGit,
   SiCss,
+  SiFlutter,
+  SiDart
 } from "react-icons/si";
 
 const SKILLS = [
@@ -38,6 +40,8 @@ const SKILLS = [
   { name: "Figma", icon: SiFigma },
   { name: "Linux", icon: SiLinux },
   { name: "Git", icon: SiGit },
+  { name: "Flutter", icon: SiFlutter},
+  { name: "Dart", icon: SiDart},
 ];
 
 const styleTag = `
