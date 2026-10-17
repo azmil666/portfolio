@@ -13,39 +13,45 @@ export const CONTENT = {
   ],
   tags: ["React", "Node.js", "Python", "TypeScript", "UI/UX"],
 },
-  projects: {
+  
+projects: {
   title: "Tales & Bounties",
   items: [
     {
       name: "Loomi",
       desc: "AI-powered productivity & journaling platform with clean UX and smart insights.",
-      tech: "React · Node.js · Express · Sharp · FastAPI · ML ",
+      tech: "React · Node.js · Express · Sharp · FastAPI · ML",
       github: "https://github.com/azmil666/Loomi",
-      live: "https://loomi-blush.vercel.app"
+      live: "https://loomi-blush.vercel.app",
+      preview: "/previews/loomi.webp"
     },
     {
       name: "CoinStorm",
       desc: "Crypto tracking and analytics dashboard with real-time market insights.",
-      tech: "Next.js · TypeScript · CoinGecko API ·  Charts ",
+      tech: "Next.js · TypeScript · CoinGecko API · Charts",
       github: "https://github.com/azmil666/coinstorm",
-      live:"https://coinstorm.vercel.app"
+      live: "https://coinstorm.vercel.app",
+      preview: "/previews/coinstorm.webp"
     },
     {
       name: "Neuro-drive",
       desc: "Self-driving car simulation with a neural network that learns and evolves in real time directly in the browser.",
-      tech: "Html · CSS · Javascript · AI · Neural Network",
+      tech: "HTML · CSS · JavaScript · AI · Neural Network",
       github: "https://github.com/azmil666/neuro-drive",
-      live:"https://neuro-drive-zeta.vercel.app"
+      live: "https://neuro-drive-zeta.vercel.app",
+      preview: "/previews/neuro-drive.webp"
     },
     {
       name: "LeaveFlow",
       desc: "Role-based leave management app with employee submissions and manager approvals with Supabase authentication.",
       tech: "Flutter · Dart · Supabase · PostgreSQL",
       github: "https://github.com/azmil666/leave_application",
-      live: "https://leaveapplication-chi.vercel.app"
+      live: "https://leaveapplication-chi.vercel.app",
+      preview: "/previews/leaveflow.webp"
     },
   ],
 },
+
   skills: {
   title: "What I Work With",
   categories: [

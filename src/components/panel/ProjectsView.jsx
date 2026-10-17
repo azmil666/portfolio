@@ -7,29 +7,47 @@ export default function ProjectsView({ content }) {
       <h2 className="panel-title">{content.title}</h2>
       <div className="panel-divider" />
 
-      <div className="projects-grid">
+      
+<div className="projects-grid">
   {content.items.map((p, i) => (
-    
-    <div 
+    <div
       key={i}
       className="project-card"
       style={{ position: "relative" }}
     >
-
-      
-      <LinkPreview url={p.live || p.github}>
+      <LinkPreview
+        url={p.live || p.github}
+        imageSrc={p.preview}
+        isStatic
+      >
         <div
           className="project-content"
           style={{
-            transition: "opacity 0.3s ease",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
-          onClick={() => window.open(p.live || p.github, "_blank")}
+          onClick={() =>
+            window.open(
+              p.live || p.github,
+              "_blank",
+              "noopener,noreferrer"
+            )
+          }
         >
-          <div className="project-num">0{i + 1}</div>
-          <div className="project-name">{p.name}</div>
-          <div className="project-desc">{p.desc}</div>
-          <div className="project-tech">{p.tech}</div>
+          <div className="project-num">
+            0{i + 1}
+          </div>
+
+          <div className="project-name">
+            {p.name}
+          </div>
+
+          <div className="project-desc">
+            {p.desc}
+          </div>
+
+          <div className="project-tech">
+            {p.tech}
+          </div>
         </div>
       </LinkPreview>
 
@@ -37,50 +55,58 @@ export default function ProjectsView({ content }) {
         style={{
           marginTop: "12px",
           display: "flex",
-          gap: "8px"
+          gap: "8px",
         }}
       >
         <button
-          onClick={() => window.open(p.github, "_blank")}
+          onClick={() =>
+            window.open(
+              p.github,
+              "_blank",
+              "noopener,noreferrer"
+            )
+          }
           style={{
             fontFamily: "Cinzel, serif",
             fontSize: "10px",
             letterSpacing: "1.5px",
             textTransform: "uppercase",
-
             padding: "6px 12px",
             borderRadius: "3px",
-
             color: "#cfcfcf",
             border: "1px solid rgba(255,255,255,0.2)",
             background: "rgba(255,255,255,0.05)",
-
             cursor: "pointer",
-            transition: "all 0.2s ease"
+            transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
             if (window.innerWidth <= 768) return;
-            e.target.style.color = "#fff";
-            e.target.style.border = "1px solid rgba(255,255,255,0.4)";
-            e.target.style.background = "rgba(255,255,255,0.12)";
-            e.target.style.transform = "translateY(-1px)";
+            e.currentTarget.style.color = "#fff";
+            e.currentTarget.style.border =
+              "1px solid rgba(255,255,255,0.4)";
+            e.currentTarget.style.background =
+              "rgba(255,255,255,0.12)";
+            e.currentTarget.style.transform =
+              "translateY(-1px)";
           }}
           onMouseLeave={(e) => {
             if (window.innerWidth <= 768) return;
-            e.target.style.color = "#cfcfcf";
-            e.target.style.border = "1px solid rgba(255,255,255,0.2)";
-            e.target.style.background = "rgba(255,255,255,0.05)";
-            e.target.style.transform = "translateY(0)";
+            e.currentTarget.style.color = "#cfcfcf";
+            e.currentTarget.style.border =
+              "1px solid rgba(255,255,255,0.2)";
+            e.currentTarget.style.background =
+              "rgba(255,255,255,0.05)";
+            e.currentTarget.style.transform =
+              "translateY(0)";
           }}
         >
           View Code
         </button>
       </div>
-
     </div>
-
   ))}
 </div>
+
       <div className="projects-more">
         <a 
           href="https://github.com/azmil666"

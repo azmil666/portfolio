@@ -1,77 +1,84 @@
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 import React, { useState } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
-import { cn } from "../lib/utils";
+import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
 
-export const LinkPreview = ({ children, url }) => {
-  const isMobile = window.matchMedia("(hover: none)").matches;
-  if (isMobile) return children;
-
-  const [loaded, setLoaded] = useState(false);
-
-  const src = `https://api.microlink.io/?url=${encodeURIComponent(
-    url
-  )}&screenshot=true&meta=false&embed=screenshot.url`;
+export const LinkPreview = ({
+  children,
+  url,
+  imageSrc,
+  isStatic = true,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const x = useMotionValue(0);
-  const translateX = useSpring(x, { stiffness: 100, damping: 15 });
+  const springX = useSpring(x, {
+    stiffness: 200,
+    damping: 25,
+  });
 
   const handleMouseMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    const offset = (event.clientX - rect.left - rect.width / 2) / 2;
+    const offset = (event.clientX - rect.left - rect.width / 2) / 3;
     x.set(offset);
   };
-  
 
   return (
-    <HoverCardPrimitive.Root openDelay={150} closeDelay={100}>
+    <HoverCardPrimitive.Root
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      openDelay={100}
+      closeDelay={150}
+    >
       <HoverCardPrimitive.Trigger asChild>
-  <div className="w-full" onMouseMove={handleMouseMove} onMouseEnter={() => setLoaded(false)} > 
-    {children}
-  </div>
-</HoverCardPrimitive.Trigger>
-     
-      <HoverCardPrimitive.Content
-  side="top"
-  align="center"
-  sideOffset={10}
-  className="z-[999] "
->
-       <motion.div
-  initial={{ opacity: 0, y: 20, scale: 0.6 }}
-  animate={{ opacity: 1, y: 0, scale: 1 }}
-  className="shadow-xl rounded-xl relative overflow-hidden"
-  style={{ x: translateX }}
->
+        <div
+          className="w-full inline-block cursor-pointer"
+          onMouseMove={handleMouseMove}
+        >
+          {children}
+        </div>
+      </HoverCardPrimitive.Trigger>
 
-  
- {!loaded && (
-  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center 
-  bg-[#1a1208] border border-[#3a2a14] rounded-lg 
-  text-[11px] tracking-wider text-[#f5e6c8] overflow-hidden">
-
-   
-    <div className="absolute inset-0 shimmer" />
-
-    
-    <img src="/compass.svg" className="w-4 mb-1 opacity-80" />
-
-    Loading preview...
-  </div>
-)}
-
- 
-  <img
-    src={src}
-    width={200}
-    height={125}
-    onLoad={() => setLoaded(true)}
-    className={`rounded-lg border border-neutral-800 transition-opacity duration-300 ${
-      loaded ? "opacity-100" : "opacity-0"
-    }`}
-  />
-</motion.div>
-      </HoverCardPrimitive.Content>
+      <HoverCardPrimitive.Portal forceMount>
+        <AnimatePresence>
+          {isOpen && imageSrc && (
+            <HoverCardPrimitive.Content
+              side="top"
+              align="center"
+              sideOffset={16}
+              collisionPadding={20}
+              asChild
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 15, scale: 0.92 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                transition={{
+                  duration: 0.25,
+                  ease: [0.16, 1, 0.3, 1], 
+                }}
+                style={{ x: springX }}
+                className="z-[99999] outline-none"
+              >
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-1 bg-white dark:bg-neutral-900 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-800 backdrop-blur-md overflow-hidden"
+                >
+                  <div className="project-preview-frame rounded-lg overflow-hidden">
+                    <img
+                      src={imageSrc}
+                      alt="Website preview"
+                      draggable="false"
+                      className="project-preview-image object-cover max-w-[250px] rounded-md transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
+                </a>
+              </motion.div>
+            </HoverCardPrimitive.Content>
+          )}
+        </AnimatePresence>
+      </HoverCardPrimitive.Portal>
     </HoverCardPrimitive.Root>
   );
 };
