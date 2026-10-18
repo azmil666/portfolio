@@ -18,8 +18,8 @@ html, body {
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
  @font-face {
-  font-family: 'Django';
-  src: url('./assets/fonts/The-Django.ttf') format('truetype');
+  font-family: 'American Captain';
+  src: url('/fonts/American-Captain.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -55,7 +55,7 @@ html, body {
   .hud-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
  .hud-star {
@@ -63,38 +63,33 @@ html, body {
   align-items: center;
   justify-content: center;
 
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 
   color: #b68d4c; 
+  transform: translateY(-3px);
 }
 
 .hud-star img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-
-  filter: drop-shadow(0 0 6px rgba(212,160,48,0.6));
 }
   .hud-name {
-  font-family: 'Django', serif;
+  font-family: 'American Captain', serif;
 
   font-size: 32px; 
   letter-spacing: 3px;
 
-  color: #f0d080;
+  color: #d4a55a;
 
   display: flex;
   align-items: center;
 
   line-height: 1;
-
-  text-shadow:
-    2px 2px 0 rgba(0,0,0,0.8),
-    0 0 20px rgba(212,160,48,0.4);
 }
   .hud-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'American Captain', serif;
     font-size: 11px;
     color: #a07840;
     letter-spacing: 3px;
@@ -108,7 +103,7 @@ html, body {
   }
 
   .hud-nav-btn {
-    font-family: 'Django', serif;
+    font-family: 'American Captain', serif;
     font-size: 25px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
@@ -143,7 +138,7 @@ html, body {
   }
 
   .section-eyebrow {
-    font-family: 'Cinzel', serif;
+    font-family: 'American Captain', serif;
     font-size: 10px;
     letter-spacing: 4px;
     color: #d4a030;
@@ -153,7 +148,7 @@ html, body {
   }
 
   .section-heading {
-    font-family: 'Django', serif;
+    font-family: 'American Captain', serif;
     font-size: clamp(36px, 5vw, 64px);
     color: #f5e0a0;
     line-height: 1;
@@ -200,7 +195,7 @@ html, body {
   }
 
   .scroll-hint span {
-    font-family: 'Cinzel', serif;
+    font-family: 'American Captain', serif;
     font-size: 10px;
     letter-spacing: 3px;
     color: rgba(212,160,48,0.6);
@@ -278,7 +273,7 @@ html, body {
 }
  
   .project-num {
-    font-family: 'Cinzel', serif;
+    font-family: 'American Captain', serif;
     font-size: 10px;
     color: #a07830;
     letter-spacing: 2px;
@@ -286,7 +281,7 @@ html, body {
   }
 
   .project-name {
-    font-family: 'Cinzel', serif;
+    font-family: 'American Captain', serif;
     font-size: 13px;
     font-weight: 600;
     color: #f0d080;
@@ -303,7 +298,7 @@ html, body {
   }
 
   .project-tech {
-    font-family: 'Cinzel', serif;
+    font-family: 'American Captain', serif;
     font-size: 9px;
     letter-spacing: 1.5px;
     color: #a07830;
@@ -336,7 +331,7 @@ html, body {
   }
 
   .skill-cat-name {
-    font-family: 'Cinzel', serif;
+    font-family: 'American Captain', serif;
     font-size: 11px;
     letter-spacing: 3px;
     color: #d4a030;
@@ -460,7 +455,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Cinzel', serif;
+  font-family: 'American Captain', serif;
   z-index: 999;
 }
 
@@ -619,30 +614,6 @@ html, body {
   }
 }
 
-.cowboy-icon {
-  width: 22px;
-  height: 22px;
-
-  background-color: #d4a030; 
-
-  -webkit-mask: url('/cowboy.png') no-repeat center;
-  -webkit-mask-size: contain;
-
-  mask: url('/cowboy.png') no-repeat center;
-  mask-size: contain;
-
-  filter: drop-shadow(0 0 6px rgba(182,141,76,0.6));
-}
-.dark .cowboy-icon {
-  background-color: #d4a030;
-
-  filter: 
-    drop-shadow(0 0 8px rgba(212,160,48,0.9))
-    drop-shadow(0 0 16px rgba(212,160,48,0.5));
-}
-
-
-
 .music-toggle {
   position: fixed;
   bottom: 24px;   
@@ -764,7 +735,7 @@ html, body {
   z-index: 10;
   
   /* Typography: Engraved/Branded look */
-  font-family: 'Cinzel', serif;
+  font-family: 'American Captain', serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -1007,7 +978,7 @@ html, body {
 
 
 .panel-eyebrow {
-  font-family: 'Cinzel', serif;
+  font-family: 'American Captain', serif;
   font-size: 10px;
   letter-spacing: 5px;
   color: rgba(212, 160, 48, 0.7);
@@ -1026,7 +997,7 @@ html, body {
 }
 
 .panel-title {
-  font-family: 'Django', serif;
+  font-family: 'American Captain', serif;
   font-size: 38px;
   color: #fada80;
   line-height: 1.1;

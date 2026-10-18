@@ -30,7 +30,7 @@ export default function HeroIntro({ currentSection = 0 }) {
     { text: 'AZMIL MOHAMMED', size: 0.5, y: 1.0, delay: 0 },
     { text: 'Computer Science Student (Year 3)', size: 0.22, y: 0.2, delay: 0.22 },
     { text: 'Kochi, India', size: 0.2, y: -0.3, delay: 0.44, hasPin: true },
-    { text: 'Turning ideas into interactive, real-world web experiences', size: 0.19, y: -0.9, delay: 0.66 },
+    { text: 'Turning ideas into interactive, real-world web experiences', size: 0.23, y: -0.9, delay: 0.66 },
   ], []);
 
   const mainGroupRef = useRef();
@@ -127,7 +127,7 @@ export default function HeroIntro({ currentSection = 0 }) {
                   bevelThickness={0.005}
                   bevelSegments={2}
                   curveSegments={12}
-                  font="/fonts/Oswald.json"
+                  font="/fonts/American-Captain.json"
                 >
                   {line.text}
 

@@ -155,8 +155,9 @@ export default function TutorialHint({ visible, onClose }) {
 }
 
 // ── All styles  ──────────────────────────────────────────────────
+// ── All styles  ──────────────────────────────────────────────────
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Rye&family=IM+Fell+English:ital@0;1&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
 
   /* ── Variables ── */
   .wpt-codex {
@@ -213,9 +214,7 @@ const CSS = `
       0 20px 60px rgba(0,0,0,0.6),
       0 4px 16px rgba(0,0,0,0.4);
 
-    /* Paper texture via repeating noise */
     background-size: 100% 100%;
-
     animation: wpt-drop-in 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
   }
   .wpt-codex.wpt-closing {
@@ -267,8 +266,8 @@ const CSS = `
     z-index: 1;
   }
   .wpt-stamp-inner {
-    font-family: 'Rye', serif;
-    font-size: 13px;
+    font-family: 'American Captain', serif;
+    font-size: 16px;
     letter-spacing: 0.35em;
     color: var(--rust);
     text-shadow: 1px 1px 0 rgba(255,220,140,0.5);
@@ -313,19 +312,27 @@ const CSS = `
     flex: 1;
   }
   .wpt-hint-icon {
-    font-size: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 10px;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+  .wpt-hint-icon img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
   }
   .wpt-hint-title {
-    font-family: 'Rye', serif;
-    font-size: 18px;
+    font-family: 'American Captain', serif;
+    font-size: 24px;
     color: var(--ink);
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     text-shadow: 1px 1px 0 rgba(255,220,140,0.4);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
   }
   .wpt-hint-text {
+    /* Kept original serif body font */
     font-family: 'IM Fell English', Georgia, serif;
     font-size: 15px;
     line-height: 1.65;
@@ -385,10 +392,10 @@ const CSS = `
     z-index: 1;
   }
   .wpt-btn {
-    font-family: 'Rye', serif;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    padding: 8px 14px;
+    font-family: 'American Captain', serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
     border-radius: 3px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -410,7 +417,7 @@ const CSS = `
   .wpt-btn-dismiss {
     background: transparent;
     color: rgba(92,61,30,0.55);
-    font-size: 11px;
+    font-size: 14px;
     border: 1.5px solid rgba(92,61,30,0.2) !important;
   }
   .wpt-btn-dismiss:hover {
@@ -468,21 +475,8 @@ const CSS = `
       padding: 22px 20px 18px;
       min-height: 380px;
     }
-    .wpt-hint-title { font-size: 16px; }
+    .wpt-hint-title { font-size: 20px; }
     .wpt-hint-text  { font-size: 14px; }
-    .wpt-btn { padding: 7px 10px; font-size: 11px; }
+    .wpt-btn { padding: 6px 10px; font-size: 14px; }
   }
-    .wpt-hint-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.wpt-hint-icon img {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
-}
 `;

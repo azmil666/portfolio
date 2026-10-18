@@ -439,7 +439,7 @@ function HUD({ currentSection, onNavClick }) {
     <div className="hud">
       <div className="hud-brand">
         <span className="hud-star">
-  <span className="hud-star cowboy-icon"></span>
+  <img src="/icon.svg" width="24" height="24" alt="Icon" />
 </span>
         <span className="hud-name">AZMIL</span>
       </div>
