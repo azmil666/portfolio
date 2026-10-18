@@ -114,7 +114,7 @@ export default function ProjectsView({ content }) {
           rel="noopener noreferrer"
           className="more-btn"
           style={{
-            fontFamily: "Cinzel, serif",
+            fontFamily: "American Captain, serif",
             fontSize: "12px",
             letterSpacing: "2px",
             textTransform: "uppercase",
