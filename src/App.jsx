@@ -814,7 +814,7 @@ target: new THREE.Vector3(${data.look.join(", ")})
     className={`music-toggle ${isPlaying ? "active" : ""} ${openPanel ? "hide-ui" : ""}`} 
     onClick={toggleMusic}
   >
-    <img src="/guitar.svg" alt="music" />
+    <img src="/guitar1.svg" alt="music" />
   </button>
 )}
       <SectionTitle currentSection={currentSection} />
