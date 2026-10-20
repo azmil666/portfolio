@@ -22,32 +22,18 @@ export default function CinematicHUDNav({ currentSection = 0, onNavClick, totalS
     <>
       <style>
         {`
-          /* Cinematic Entrance Animation */
           @keyframes hudEntrance {
-            0% {
-              opacity: 0;
-              transform: translateY(-50%) translateX(40px);
-            }
-            100% {
-              opacity: 1;
-              transform: translateY(-50%) translateX(0);
-            }
+            0% { opacity: 0; transform: translateY(-50%) translateX(40px); }
+            100% { opacity: 1; transform: translateY(-50%) translateX(0); }
           }
 
-          /* Subtle Idle Breathing Effect */
-          @keyframes hudBreathe {
-            0% { box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 0 rgba(212, 160, 48, 0); }
-            50% { box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), inset 0 0 8px rgba(212, 160, 48, 0.15); }
-            100% { box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 0 rgba(212, 160, 48, 0); }
-          }
-
-          /* Section Change Pulse */
+          /* Section Change  */
           @keyframes pulseTrack {
-            0% { background: rgba(212, 160, 48, 0.8); box-shadow: 0 0 15px rgba(212, 160, 48, 0.6); }
-            100% { background: rgba(212, 160, 48, 0.15); box-shadow: 0 0 0 rgba(212, 160, 48, 0); }
+            0% { background: #d4a030; box-shadow: 0 0 8px rgba(212, 160, 48, 0.4); }
+            100% { background: #0a0502; box-shadow: inset 0 2px 4px rgba(0,0,0,0.9); }
           }
 
-          /* HUD Container */
+          /* HUD Container  */
           .hud-nav-panel {
             position: fixed;
             top: 50%;
@@ -61,93 +47,88 @@ export default function CinematicHUDNav({ currentSection = 0, onNavClick, totalS
             height: 160px;
             padding: 8px 0;
             border-radius: 40px;
-            background: rgba(18, 14, 12, 0.65); /* Dark, slightly warm cinematic base */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            animation: 
-              hudEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-              hudBreathe 4s ease-in-out infinite alternate;
-            /* Faint Vignette integration */
-            background-image: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.4) 100%);
+            
+            background: linear-gradient(180deg, #2b1d12 0%, #110a05 100%);
+            border: 2px solid #3a2615;
+            box-shadow: 
+              0 8px 24px rgba(0, 0, 0, 0.8),
+              inset 0 2px 4px rgba(255, 255, 255, 0.05),
+              inset 0 -4px 8px rgba(0, 0, 0, 0.8);
+              
+            animation: hudEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
 
-          /* Connecting Rail/Track */
           .hud-rail {
             position: absolute;
-            top: 50px;
-            bottom: 50px;
-            width: 2px;
-            background: rgba(212, 160, 48, 0.15);
-            border-radius: 2px;
+            top: 54px;
+            bottom: 54px;
+            width: 6px;
+            background: #0a0502;
+            border-radius: 4px;
             z-index: 1;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,1), 0 1px 0 rgba(255,255,255,0.05);
           }
 
           .hud-rail.is-pulsing {
             animation: pulseTrack 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
 
-          /* Tactile Buttons */
           .hud-btn {
             position: relative;
             z-index: 2;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(145deg, rgba(30, 25, 22, 0.8), rgba(15, 12, 10, 0.9));
-            border: 1px solid rgba(212, 160, 48, 0.1);
-            color: #b39b78; /* Muted dusty gold */
+            background: linear-gradient(180deg, #5c3a21 0%, #3b2210 100%);
+            border: 1px solid #1a0f07;
+            color: #b39b78; 
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             outline: none;
             -webkit-tap-highlight-color: transparent;
+            
+            /* 3D Thickness & Beveling */
             box-shadow: 
-              4px 4px 10px rgba(0, 0, 0, 0.6),
-              -2px -2px 6px rgba(255, 255, 255, 0.03),
-              inset 0 -2px 4px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+              inset 0 1px 1px rgba(255, 255, 255, 0.15), 
+              inset 0 -2px 4px rgba(0, 0, 0, 0.5),       
+              0 4px 0 #1f1006,                           
+              0 6px 12px rgba(0, 0, 0, 0.7);
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
           }
 
-          /* Micro-interactions: Hover & Active */
+          /* Micro-interactions: Hover */
           @media (hover: hover) {
             .hud-btn:hover:not(.is-disabled) {
-              color: #d4a030; /* Bright Soft Gold */
-              background: linear-gradient(145deg, rgba(40, 32, 28, 0.9), rgba(20, 16, 14, 1));
-              border-color: rgba(212, 160, 48, 0.4);
+              color: #fada80;
+              background: linear-gradient(180deg, #6d4629 0%, #472b15 100%);
               box-shadow: 
-                0 0 12px rgba(212, 160, 48, 0.2),
-                4px 4px 10px rgba(0, 0, 0, 0.8),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.5);
-            }
-            .hud-btn:hover:not(.is-disabled) svg {
-              filter: drop-shadow(0 0 4px rgba(212, 160, 48, 0.6));
-              transform: scale(1.1);
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.6),
+                0 4px 0 #1f1006,                          
+                0 8px 15px rgba(0, 0, 0, 0.9);
             }
           }
 
           .hud-btn:active:not(.is-disabled) {
-            transform: scale(0.9) translateY(2px);
+            transform: translateY(4px);
+            background: linear-gradient(180deg, #3b2210 0%, #2b1d12 100%);
             box-shadow: 
-              inset 2px 4px 8px rgba(0, 0, 0, 0.8),
-              inset -1px -1px 4px rgba(255, 255, 255, 0.02);
+              inset 0 4px 8px rgba(0, 0, 0, 0.9),       
+              0 0 0 #1f1006,                            
+              0 2px 4px rgba(0, 0, 0, 0.8);
             color: #d4a030;
           }
 
-          .hud-btn.is-up:active:not(.is-disabled) {
-            transform: scale(0.9) translateY(-2px);
-          }
-
-          /* Directional Hinting (Disabled States) */
           .hud-btn.is-disabled {
-            opacity: 0.25;
+            opacity: 0.6;
             cursor: default;
             pointer-events: none;
-            box-shadow: none;
-            background: rgba(15, 12, 10, 0.5);
-            border-color: transparent;
+            background: #1a0f07;
+            color: #3b2210;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.9);
+            transform: translateY(4px);
           }
 
           /* SVG Icon Styling */
@@ -155,11 +136,11 @@ export default function CinematicHUDNav({ currentSection = 0, onNavClick, totalS
             width: 20px;
             height: 20px;
             stroke: currentColor;
-            stroke-width: 2.5;
+            stroke-width: 3;
             stroke-linecap: round;
             stroke-linejoin: round;
             fill: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.2s ease;
           }
         `}
       </style>
