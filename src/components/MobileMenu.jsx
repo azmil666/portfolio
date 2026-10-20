@@ -31,7 +31,7 @@ export default function MobileMenu({ onNavClick, setMenuOpen, playOpen, playClos
      
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+          
 
           /* Restrict to Mobile Screens */
           @media (min-width: 768px) {
@@ -142,13 +142,13 @@ export default function MobileMenu({ onNavClick, setMenuOpen, playOpen, playClos
           .rdr-header {
             position: relative;
             z-index: 2;
-            font-family: 'Django', serif;
-            color: #8c1c13; /* Crimson */
+            font-family: 'American Captain', serif;
+            color: #d4a030;; 
             font-size: 13px;
             letter-spacing: 5px;
             text-transform: uppercase;
             margin-bottom: 40px;
-            border-bottom: 1px solid rgba(140, 28, 19, 0.4);
+            border-bottom: 1px solid rgba(212, 160, 48, 0.25);
             padding-bottom: 12px;
             opacity: 0;
             transform: translateX(30px);
@@ -172,7 +172,7 @@ export default function MobileMenu({ onNavClick, setMenuOpen, playOpen, playClos
             background: transparent;
             border: none;
             color: #9c8e79; /* Muted Dusty Gold */
-            font-family: 'Django', serif;
+            font-family: 'American Captain', serif;
             font-size: 26px;
             font-weight: 400;
             text-transform: uppercase;
@@ -217,7 +217,7 @@ export default function MobileMenu({ onNavClick, setMenuOpen, playOpen, playClos
           /* Hover & Active / Tactile Glow State */
           .rdr-btn::before {
             content: '•';
-            color: #8c1c13; /* Crimson bullet */
+            color: #d4a030;
             position: absolute;
             left: -20px;
             opacity: 0;
