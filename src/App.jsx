@@ -437,7 +437,8 @@ function HUD({ currentSection, onNavClick }) {
 
   return (
     <div className="hud">
-      <div className="hud-brand">
+      <div className="hud-brand" onClick={() => onNavClick(0)} 
+        style={{ cursor: "pointer", userSelect: "none" }}>
         <span className="hud-star">
   <img src="/icon.svg" width="24" height="24" alt="Icon" />
 </span>
