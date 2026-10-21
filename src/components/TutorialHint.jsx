@@ -384,13 +384,25 @@ const CSS = `
 
   /* ── Nav buttons ── */
   .wpt-nav {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.wpt-btn-ghost {
+  justify-self: start;
+}
+
+.wpt-btn-dismiss {
+  justify-self: center;
+}
+
+.wpt-btn-primary {
+  justify-self: end;
+}
   .wpt-btn {
     font-family: 'American Captain', serif;
     font-size: 16px;
