@@ -19,7 +19,7 @@ projects: {
   items: [
     {
       name: "Loomi",
-      desc: "AI-powered productivity & journaling platform with clean UX and smart insights.",
+      desc: "Loomi is an image processing platform offering tools for background removal, image upscaling, and many more",
       tech: "React · Node.js · Express · Sharp · FastAPI · ML",
       github: "https://github.com/azmil666/Loomi",
       live: "https://loomi-blush.vercel.app",
@@ -33,14 +33,14 @@ projects: {
       live: "https://coinstorm.vercel.app",
       preview: "/previews/coinstorm.webp"
     },
-    {
-      name: "Neuro-drive",
-      desc: "Self-driving car simulation with a neural network that learns and evolves in real time directly in the browser.",
-      tech: "HTML · CSS · JavaScript · AI · Neural Network",
-      github: "https://github.com/azmil666/neuro-drive",
-      live: "https://neuro-drive-zeta.vercel.app",
-      preview: "/previews/neuro-drive.webp"
-    },
+      {
+    name: "Resource Hub",
+    desc: "Curated open-source developer directory featuring 250+ tools, AI agent skills, UI libraries, and learning resources with fast search.",
+    tech: "VitePress · Markdown · Vue · JavaScript · Open-source",
+    github: "https://github.com/azmil666/resource-hub",
+    live: "https://resource-hub-phi-teal.vercel.app",
+    preview: "/previews/resource-hub.webp"
+  },
     {
       name: "LeaveFlow",
       desc: "Role-based leave management app with employee submissions and manager approvals with Supabase authentication.",
